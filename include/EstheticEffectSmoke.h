@@ -11,11 +11,14 @@ class EstheticEffectSmoke : public EstheticEffect
 
         virtual ~EstheticEffectSmoke();
 
+        virtual void setColor(sf::Color color);
+
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        float m_startSize, m_endSize;
+        float m_startSize, m_endSize, m_size;
+        sf::Color m_color;
 
     private:
 };

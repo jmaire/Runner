@@ -24,7 +24,7 @@ void EstheticEffectExplosion::render(sf::RenderWindow& window)
 
         float layoutSize = m_explosionSize * (1.f - ratio);
         sf::Vector2f explosionRectangle = sf::Vector2f(layoutSize, layoutSize);
-        sf::RectangleShape shape = getRectangleShapeForWindow(window, explosionRectangle, m_body.getPosition());
+        sf::RectangleShape shape = getRectangleShapeForWindow(window, explosionRectangle, m_position);
 
         shape.setFillColor(sf::Color(255,
                                      150 * ratio + 105,

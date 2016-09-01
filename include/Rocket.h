@@ -14,7 +14,7 @@ const sf::Color ROCKET_COLOR = sf::Color(100, 150, 50, 255);
 const float ROCKET_EXPLOSION_SIZE = 60.f;
 const sf::Vector2f ROCKET_EXPLOSION_RECTANGLE = sf::Vector2f(ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_SIZE);
 const float ROCKET_EXPLOSION_VELOCITY = 200.f;
-const float ROCKET_EXPLOSION_DURATION = 1.5f;
+const float ROCKET_EXPLOSION_DURATION = 0.5f;
 const unsigned int ROCKET_EXPLOSION_LAYOUT = 8;
 
 const float ROCKET_SMOKE_DURATION = 0.4f;
@@ -47,7 +47,7 @@ class Rocket : public Doodad
 
     protected:
         bool m_isExploding, m_isDone, m_propelledCharacter;
-        float m_rocketTimer;//, m_explosionTimer;
+        float m_rocketTimer;
 
         float m_smokeTimer;
 };

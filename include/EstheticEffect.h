@@ -15,8 +15,6 @@ class EstheticEffect : public Entity
         virtual ~EstheticEffect();
 
         virtual void setPosition(sf::Vector2f position);
-        virtual void setColor(sf::Color color);
-        virtual void setGrayScale(unsigned int gs);
 
         virtual bool hasExpired();
 
@@ -24,9 +22,10 @@ class EstheticEffect : public Entity
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        Body m_body;
+        //Body m_body;
         float m_elaspedTime, m_expirationTimer;
-        sf::Color m_color;
+        sf::Vector2f m_position;
+        //sf::Color m_color;
 
     private:
 };

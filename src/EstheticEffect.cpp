@@ -14,17 +14,7 @@ EstheticEffect::~EstheticEffect()
 
 void EstheticEffect::setPosition(sf::Vector2f position)
 {
-    m_body.setPosition(position);
-}
-
-void EstheticEffect::setColor(sf::Color color)
-{
-    m_color = color;
-}
-
-void EstheticEffect::setGrayScale(unsigned int gs)
-{
-    m_color = sf::Color(gs,gs,gs);
+    m_position = position;
 }
 
 bool EstheticEffect::hasExpired()

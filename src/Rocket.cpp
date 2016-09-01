@@ -89,28 +89,15 @@ void Rocket::update(float dt)
     if(m_isExploding)
     {
         if(m_isDone || hadPropelledCharacter())
-        {
             toDestroy(true);
-        }
-        else
-        {
-            m_isDone = true;
-        }
-        /*
-        m_explosionTimer += dt;
-        if(m_explosionTimer >= ROCKET_EXPLOSION_DURATION)
-        {
-            toDestroy(true);
-        }
-        */
+
+        m_isDone = true;
     }
     else
     {
         m_rocketTimer += dt;
         if(m_rocketTimer >= ROCKET_DURATION)
-        {
             explode();
-        }
 
         m_smokeTimer += dt;
         if(m_smokeTimer > 0.02f)
