@@ -20,6 +20,11 @@ void EstheticEffectSmoke::setColor(sf::Color color)
     m_color = color;
 }
 
+void EstheticEffectSmoke::setVelocity(sf::Vector2f velocity)
+{
+    m_velocity = velocity;
+}
+
 void EstheticEffectSmoke::update(float dt)
 {
     m_elaspedTime += dt;
@@ -29,6 +34,8 @@ void EstheticEffectSmoke::update(float dt)
     {
         float timeElaspedRatio = m_elaspedTime / m_expirationTimer;
         m_size = m_startSize + (m_endSize - m_startSize) * timeElaspedRatio;
+        m_position.x += m_velocity.x * dt;
+        m_position.y += m_velocity.y * dt;
     }
 }
 

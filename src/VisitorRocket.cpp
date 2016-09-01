@@ -1,4 +1,5 @@
 #include "VisitorRocket.h"
+#include "tools.h"
 
 VisitorRocket::VisitorRocket(Rocket* rocket)
 : VisitorDoodad<Rocket>(rocket)
@@ -30,7 +31,8 @@ void VisitorRocket::visitCharacter(Character* e)
 	if(fabs(deltaX) > fabs(deltaY))
 		explodeValue /= 2.f;
 
-	sf::Vector2f explodeVelocity;
+	sf::Vector2f explodeVelocity;// = sf::Vector2f(0.f ,ROCKET_EXPLOSION_VELOCITY*MY_MAX(1.f,deltaY/(deltaX+deltaY)));
+
 	if(deltaY>0.f)
 		explodeVelocity = sf::Vector2f(0.f, explodeValue);
 	else

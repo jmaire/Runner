@@ -22,10 +22,8 @@ class EstheticEffect : public Entity
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        //Body m_body;
         float m_elaspedTime, m_expirationTimer;
         sf::Vector2f m_position;
-        //sf::Color m_color;
 
     private:
 };

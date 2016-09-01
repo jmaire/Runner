@@ -66,6 +66,19 @@ void Rocket::createSmoke()
 
 void Rocket::createExplosion()
 {
+    for(unsigned int i=0; i<5; i++)
+    {
+        float startSize = rand() % 8 + 8.f;
+        float endSize = startSize + rand() % 8 + 8.f;
+        EstheticEffectSmoke* ees = new EstheticEffectSmoke(ROCKET_SMOKE_DURATION, startSize, endSize);
+        ees->setPosition(m_body.getPosition());
+        ees->setColor(ROCKET_SMOKE_COLOR);
+        float angle = rand() % 360;
+        float velocity = rand() % 200 + 100.f;
+        ees->setVelocity(sf::Vector2f(velocity * cos(angle),velocity * sin(angle)));
+        m_aEstheticEffect.push_back(ees);
+    }
+
     EstheticEffectExplosion* eee = new EstheticEffectExplosion(ROCKET_EXPLOSION_DURATION, ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_LAYOUT);
     eee->setPosition(m_body.getPosition());
     m_aEstheticEffect.push_back(eee);

@@ -12,12 +12,14 @@ class EstheticEffectSmoke : public EstheticEffect
         virtual ~EstheticEffectSmoke();
 
         virtual void setColor(sf::Color color);
+        virtual void setVelocity(sf::Vector2f velocity);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 
     protected:
         float m_startSize, m_endSize, m_size;
+        sf::Vector2f m_velocity;
         sf::Color m_color;
 
     private:
