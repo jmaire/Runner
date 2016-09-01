@@ -93,36 +93,21 @@ void Doodad::accept(Visitor& v)
 void Doodad::collisionEvent(Doodad& doodad)
 {}
 
-void Doodad::updateEE(float dt)
+EstheticEffect* Doodad::popEstheticEffect()
 {
-    for(std::vector<EstheticEffect*>::iterator it = m_aEstheticEffect.begin(); it != m_aEstheticEffect.end(); )
-    {
-        (*it)->update(dt);
-        if((*it)->isPendingDestruction())
-        {
-            EstheticEffect* ee = *it;
-            m_aEstheticEffect.erase(it);
-            delete ee;
-        }
-        else
-            ++it;
-    }
-}
+    if(m_aEstheticEffect.empty())
+        return nullptr;
 
-void Doodad::renderEE(sf::RenderWindow& window)
-{
-    for(std::vector<EstheticEffect*>::iterator it = m_aEstheticEffect.begin(); it != m_aEstheticEffect.end(); ++it)
-        (*it)->render(window);
+    EstheticEffect* ee = m_aEstheticEffect.at(0);
+    m_aEstheticEffect.erase(m_aEstheticEffect.begin());
+    return ee;
 }
 
 void Doodad::update(float dt)
 {
 	m_body.update(dt);
-	updateEE(dt);
 }
 
 void Doodad::render(sf::RenderWindow& window)
-{
-    renderEE(window);
-}
+{}
 

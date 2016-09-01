@@ -34,8 +34,7 @@ class Doodad : public Entity
         virtual void accept(Visitor& v);
         virtual void collisionEvent(Doodad& doodad);
 
-        virtual void updateEE(float dt);
-        virtual void renderEE(sf::RenderWindow& window);
+        virtual EstheticEffect* popEstheticEffect(void);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);

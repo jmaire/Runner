@@ -9,9 +9,7 @@ EstheticEffectSmoke::EstheticEffectSmoke(float expirationTimer, float startSize,
 {}
 
 EstheticEffectSmoke::EstheticEffectSmoke()
-: EstheticEffect()
-, m_startSize(0.f)
-, m_endSize(0.f)
+: EstheticEffectSmoke(0.f, 0.f, 0.f)
 {}
 
 EstheticEffectSmoke::~EstheticEffectSmoke()
@@ -46,4 +44,5 @@ void EstheticEffectSmoke::render(sf::RenderWindow& window)
     shape.setRotation(rand() % 90);
 
     window.draw(shape);
+
 }

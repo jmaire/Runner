@@ -19,6 +19,8 @@ class ListDoodad
 
         virtual void collision(Doodad& doodad);
 
+        virtual EstheticEffect* popEstheticEffect(void);
+
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 

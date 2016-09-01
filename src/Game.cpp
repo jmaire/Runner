@@ -12,6 +12,7 @@ Exit Game::m_exit;
 ListDoodad<Bonus> Game::m_bonusList;
 ListDoodad<Rocket> Game::m_rocketList;
 ListDoodad<Wall> Game::m_wallList;
+std::vector<EstheticEffect*> Game::m_aEstheticEffect;
 
 Game::Game()
 {}
@@ -33,13 +34,17 @@ void Game::initLevel()
 
     m_rocketList = ListDoodad<Rocket>();
 }
-/*
-void Game::getEstheticEffect()
+
+void Game::collectEstheticEffect()
 {
-    while(!m_rocketList.noPendingEstheticEffect())
-        m_aEstheticEffect.push_back(m_rocketList.popPendingEstheticEffect());
+    EstheticEffect* ee = m_rocketList.popEstheticEffect();
+    while(nullptr != ee)
+    {
+        m_aEstheticEffect.push_back(ee);
+        ee = m_rocketList.popEstheticEffect();
+    }
 }
-*/
+
 void Game::computeCamera(sf::RenderWindow& window)
 {
 	if(0 != m_character.getState())
@@ -172,6 +177,20 @@ void Game::update(float dt)
     m_exit.update(dt);
     m_rocketList.update(dt);
     m_wallList.update(dt);
+    collectEstheticEffect();
+
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
+    {
+        (*it)->update(dt);
+        if((*it)->hasExpired())
+        {
+            EstheticEffect* tmp = *it;
+            m_aEstheticEffect.erase(it);
+            delete tmp;
+        }
+        else
+            ++it;
+    }
 }
 
 void Game::render(sf::RenderWindow& window)
@@ -202,6 +221,9 @@ void Game::render(sf::RenderWindow& window)
     m_exit.render(window);
     m_wallList.render(window);
     m_bonusList.render(window);
+
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
+        (*it)->render(window);
 
     m_rocketList.render(window);
 

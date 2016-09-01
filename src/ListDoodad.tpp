@@ -38,6 +38,18 @@ void ListDoodad<T>::collision(Doodad& doodad)
 }
 
 template <typename T>
+EstheticEffect* ListDoodad<T>::popEstheticEffect()
+{
+    for(typename std::vector<T>::iterator it=m_doodads.begin(); it!=m_doodads.end(); ++it)
+    {
+        EstheticEffect* ee = it->popEstheticEffect();
+        if(nullptr != ee)
+            return ee;
+    }
+    return nullptr;
+}
+
+template <typename T>
 void ListDoodad<T>::update(float dt)
 {
     for(typename std::vector<T>::iterator it=m_doodads.begin(); it!=m_doodads.end(); )

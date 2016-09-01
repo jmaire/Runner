@@ -1,7 +1,6 @@
 #ifndef ROCKET_H
 #define ROCKET_H
 
-#include "EstheticEffectSmoke.h"
 #include "VisitorRocket.h"
 
 const float ROCKET_DURATION = 3.f;
@@ -12,10 +11,11 @@ const float ROCKET_VELOCITY = 800.f;
 const float ROCKET_FRICTION = 0.01f;
 const sf::Color ROCKET_COLOR = sf::Color(100, 150, 50, 255);
 
-const float ROCKET_EXPLOSION_TIME = 0.5f;
 const float ROCKET_EXPLOSION_SIZE = 60.f;
 const sf::Vector2f ROCKET_EXPLOSION_RECTANGLE = sf::Vector2f(ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_SIZE);
 const float ROCKET_EXPLOSION_VELOCITY = 200.f;
+const float ROCKET_EXPLOSION_DURATION = 1.5f;
+const unsigned int ROCKET_EXPLOSION_LAYOUT = 8;
 
 const float ROCKET_SMOKE_DURATION = 0.4f;
 const float ROCKET_SMOKE_STARTING_SIZE = 12.f;
@@ -37,6 +37,7 @@ class Rocket : public Doodad
         virtual bool hadPropelledCharacter(void);
 
         virtual void createSmoke(void);
+        virtual void createExplosion(void);
 
         virtual void accept(Visitor& v);
         virtual void collisionEvent(Doodad& doodad);
@@ -45,8 +46,8 @@ class Rocket : public Doodad
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        bool m_isExploding, m_propelledCharacter;
-        float m_rocketTimer, m_explosionTimer;
+        bool m_isExploding, m_isDone, m_propelledCharacter;
+        float m_rocketTimer;//, m_explosionTimer;
 
         float m_smokeTimer;
 };

@@ -15,6 +15,7 @@ class Game
         static void setLevel(Level& level);
         static void initLevel(void);
 
+        static void collectEstheticEffect(void);
         static void computeCamera(sf::RenderWindow& window);
 
         static void collision(void);
@@ -37,6 +38,8 @@ class Game
         static ListDoodad<Bonus> m_bonusList;
         static ListDoodad<Rocket> m_rocketList;
         static ListDoodad<Wall> m_wallList;
+
+        static std::vector<EstheticEffect*> m_aEstheticEffect;
 
     private:
         Game(void);

@@ -1,13 +1,16 @@
 #include <cmath>
+#include "EstheticEffectExplosion.h"
+#include "EstheticEffectSmoke.h"
 #include "Rocket.h"
 #include "tools.h"
 
 Rocket::Rocket()
 : Doodad()
 , m_isExploding(false)
+, m_isDone(false)
 , m_propelledCharacter(false)
 , m_rocketTimer(0.f)
-, m_explosionTimer(0.f)
+//, m_explosionTimer(0.f)
 , m_smokeTimer(0.f)
 {
     m_body.setRectangle(ROCKET_RECTANGLE);
@@ -35,6 +38,7 @@ void Rocket::explode()
     m_body.setRestitution(0.f);
     m_body.setVelocity(sf::Vector2f(0.f,0.f));
     m_body.setRectangle(ROCKET_EXPLOSION_RECTANGLE);
+    createExplosion();
 }
 
 bool Rocket::isExploding()
@@ -60,6 +64,13 @@ void Rocket::createSmoke()
     m_aEstheticEffect.push_back(ees);
 }
 
+void Rocket::createExplosion()
+{
+    EstheticEffectExplosion* eee = new EstheticEffectExplosion(ROCKET_EXPLOSION_DURATION, ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_LAYOUT);
+    eee->setPosition(m_body.getPosition());
+    m_aEstheticEffect.push_back(eee);
+}
+
 void Rocket::accept(Visitor& v)
 {
 	v.visitRocket(this);
@@ -74,16 +85,24 @@ void Rocket::collisionEvent(Doodad& doodad)
 void Rocket::update(float dt)
 {
     m_body.update(dt);
-    updateEE(dt);
 
-    // TODO // if this go threw the world limits
     if(m_isExploding)
     {
-        m_explosionTimer += dt;
-        if(m_explosionTimer >= ROCKET_EXPLOSION_TIME)
+        if(m_isDone || hadPropelledCharacter())
         {
             toDestroy(true);
         }
+        else
+        {
+            m_isDone = true;
+        }
+        /*
+        m_explosionTimer += dt;
+        if(m_explosionTimer >= ROCKET_EXPLOSION_DURATION)
+        {
+            toDestroy(true);
+        }
+        */
     }
     else
     {
@@ -105,30 +124,10 @@ void Rocket::update(float dt)
 
 void Rocket::render(sf::RenderWindow& window)
 {
-    renderEE(window);
-
 	sf::Vector2f rectangle = m_body.getRectangle();
 	sf::Vector2f position = m_body.getPosition();
 
-	if(m_isExploding)
-    {
-        float timeElaspedRatio = m_explosionTimer / ROCKET_EXPLOSION_TIME;
-
-        unsigned int rectangleNumber = 10.f;
-        for(unsigned int i=0; i<rectangleNumber; i++)
-        {
-            float sizeRatio = (1.f-(float)i/rectangleNumber);
-            sf::Vector2f explosionRectangle = sf::Vector2f(rectangle.x * sizeRatio, rectangle.y * sizeRatio);
-            sf::RectangleShape shape = getRectangleShapeForWindow(window, explosionRectangle, position);
-
-            shape.setFillColor(sf::Color(255, 150*i/rectangleNumber+105, 50, 255*(1-timeElaspedRatio)));
-            shape.setOrigin(getRectangleCenter(explosionRectangle));
-            shape.setRotation(rand()%90);
-
-            window.draw(shape);
-        }
-    }
-    else
+    if(!m_isExploding)
     {
         sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
 
