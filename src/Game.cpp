@@ -1,10 +1,12 @@
 #include "Game.h"
 #include "RessourcesManager.h"
 #include "tinyxml2.h"
+#include "tools.h"
 
 Level Game::m_level;
 
 sf::View Game::m_camera;
+sf::View Game::m_cameraUI;
 bool Game::m_pause;
 
 Character Game::m_character;
@@ -13,6 +15,9 @@ ListDoodad<Bonus> Game::m_bonusList;
 ListDoodad<Rocket> Game::m_rocketList;
 ListDoodad<Wall> Game::m_wallList;
 std::vector<EstheticEffect*> Game::m_aEstheticEffect;
+
+float Game::m_uiBonusAngle;
+float Game::m_uiBonusGlowingTimer;
 
 Game::Game()
 {}
@@ -47,27 +52,19 @@ void Game::collectEstheticEffect()
 
 void Game::computeCamera(sf::RenderWindow& window)
 {
-	if(0 != m_character.getState())
-		return;
-
 	sf::Vector2f charactPos = m_character.getBody().getPosition();
-	sf::Vector2f charactRec = m_character.getBody().getRectangle();
 
 	int width = window.getSize().x;
 	int height = window.getSize().y;
 
-    float y_pos = charactPos.y + charactRec.y / 2.f;
-    float yMin = m_level.getYMin();
-    if(y_pos < yMin + height / 2.f)
-		y_pos = yMin + height / 2.f;
-
-	float x_max = m_exit.getBody().getXMax();
-	float x_pos = charactPos.x + charactRec.x / 2.f + width / 4.f;
-    if(x_pos > x_max - width / 2.f)
-		x_pos = x_max - width / 2.f;
+	sf::Vector2f cameraCenter;
+    cameraCenter.x = MY_MIN(m_exit.getBody().getXMax() - width / 2.f, charactPos.x + width / 4.f);
+    cameraCenter.y = height - MY_MAX(m_level.getYMin() + height / 2.f, charactPos.y);
 
 	m_camera.setSize(width, height);
-	m_camera.setCenter(x_pos, height - y_pos);
+	m_camera.setCenter(cameraCenter);
+
+    m_cameraUI.setViewport(sf::FloatRect(0, 0, 1, 1));
 }
 
 void Game::collision()
@@ -98,7 +95,7 @@ int Game::startLevel(sf::RenderWindow& window)
 		if(2 == m_character.getState())
 			return 1;
 
-		/// Compute all collisions
+		// Compute all collisions
 		collision();
 
 		sf::Event event;
@@ -152,9 +149,10 @@ int Game::startLevel(sf::RenderWindow& window)
 			update(elapsed.asSeconds());
 		}
 
-		window.clear(sf::Color(100,100,100));
+		window.clear(sf::Color(50, 50, 50));
 		computeCamera(window);
 		render(window);
+		renderUI(window);
 
 		window.display();
 	}
@@ -191,6 +189,11 @@ void Game::update(float dt)
         else
             ++it;
     }
+
+    m_uiBonusAngle += BONUS_ANGULAR_VELOCITY * dt;
+    m_uiBonusGlowingTimer += dt;
+    if(m_uiBonusGlowingTimer >= BONUS_GLOWING_DURATION)
+        m_uiBonusGlowingTimer = 0.f;
 }
 
 void Game::render(sf::RenderWindow& window)
@@ -254,4 +257,47 @@ void Game::render(sf::RenderWindow& window)
         shape.setFillColor(sf::Color(0, 0, 5, 200));
         window.draw(shape);
     }
+}
+
+void Game::renderUI(sf::RenderWindow& window)
+{
+    sf::RectangleShape barShape;// TODO
+    barShape.setSize(sf::Vector2f(window.getSize().x, 70.f));
+    barShape.setPosition(sf::Vector2f(0.f,0.f));
+    //barShape.setOrigin(barShape.getSize() / 2.f);
+    barShape.setFillColor(sf::Color(0,0,0,100));
+
+    sf::Vector2f rectangle = sf::Vector2f(30.f, 30.f);
+    sf::Vector2f position = sf::Vector2f(30.f, 35.f);
+
+    sf::RectangleShape bonusShape;
+    bonusShape.setSize(rectangle);
+    bonusShape.setPosition(position);
+    bonusShape.setOrigin(bonusShape.getSize() / 2.f);
+    bonusShape.setFillColor(BONUS_COLOR);
+    bonusShape.setRotation(m_uiBonusAngle);
+
+    float timeElaspedRatio = m_uiBonusGlowingTimer / BONUS_GLOWING_DURATION;
+    float glowingSize = 30.f + 20.f * timeElaspedRatio;
+    sf::RectangleShape bonusGlowingShape;
+    bonusGlowingShape.setSize(sf::Vector2f(glowingSize, glowingSize));
+    bonusGlowingShape.setPosition(position);
+    bonusGlowingShape.setOrigin(bonusGlowingShape.getSize() / 2.f);
+    bonusGlowingShape.setRotation(m_uiBonusAngle);
+
+    sf::Color glowingColor = BONUS_GLOWING_COLOR;
+    glowingColor.a = 200 * (1.f - timeElaspedRatio);
+	bonusGlowingShape.setFillColor(glowingColor);
+
+    sf::Text bonusText = sf::Text("x0", RessourcesManager::getFont(), 48);
+    bonusText.setPosition(sf::Vector2f(60.f, 0.f));
+
+    window.setView(m_cameraUI);
+    window.draw(barShape);
+    window.draw(bonusText);
+    window.draw(bonusGlowingShape);
+    window.draw(bonusShape);
+
+
+    window.setView(m_camera);
 }

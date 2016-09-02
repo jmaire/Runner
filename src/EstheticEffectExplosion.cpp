@@ -29,7 +29,7 @@ void EstheticEffectExplosion::render(sf::RenderWindow& window)
         shape.setFillColor(sf::Color(255,
                                      150 * ratio + 105,
                                      50,
-                                     200 * (1 - timeElaspedRatio))
+                                     200 * (1.f - timeElaspedRatio))
                            );
         shape.setOrigin(getRectangleCenter(explosionRectangle));
         shape.setRotation(rand()%90);

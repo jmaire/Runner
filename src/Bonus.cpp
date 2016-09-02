@@ -3,6 +3,8 @@
 
 Bonus::Bonus()
 : Doodad()
+, m_angle(rand() % 90)
+, m_glowingTimer(0.f)
 {
     m_body.setRectangle(BONUS_RECTANGLE);
 }
@@ -27,19 +29,34 @@ void Bonus::collisionEvent(Doodad* doodad)
 	doodad->accept(v);
 }
 
+void Bonus::update(float dt)
+{
+	m_body.update(dt);
+    m_angle += BONUS_ANGULAR_VELOCITY * dt;
+    m_glowingTimer += dt;
+    if(m_glowingTimer >= BONUS_GLOWING_DURATION)
+        m_glowingTimer = 0.f;
+}
+
 void Bonus::render(sf::RenderWindow& window)
 {
-	if(1 == m_state)
-	{
-		return;
-	}
-
 	sf::Vector2f rectangle = m_body.getRectangle();
     sf::Vector2f position = m_body.getPosition();
-    sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
 
+    sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
+    shape.setRotation(m_angle);
 	shape.setFillColor(BONUS_COLOR);
 
+    float timeElaspedRatio = m_glowingTimer / BONUS_GLOWING_DURATION;
+    float glowingSize = BONUS_SIZE + (BONUS_GLOWING_MAX_SIZE - BONUS_SIZE) * timeElaspedRatio;
+    sf::RectangleShape glowingShape = getRectangleShapeForWindow(window, sf::Vector2f(glowingSize, glowingSize), position);
+    glowingShape.setRotation(m_angle);
+
+    sf::Color glowingColor = BONUS_GLOWING_COLOR;
+    glowingColor.a = 200 * (1.f - timeElaspedRatio);
+	glowingShape.setFillColor(glowingColor);
+
+	window.draw(glowingShape);
 	window.draw(shape);
 }
 

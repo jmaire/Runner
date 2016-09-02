@@ -78,11 +78,11 @@
 		</wall>
 
 		<bonus>
-			<position posX="100" posY="100" />
+			<position posX="100" posY="250" />
 		</bonus>
 
 		<bonus>
-			<position posX="250" posY="100" />
+			<position posX="250" posY="400" />
 		</bonus>
 	</level>
 </world>

@@ -24,6 +24,7 @@ class Game
 
         static void update(float dt);
         static void render(sf::RenderWindow& window);
+        static void renderUI(sf::RenderWindow& window);
 
         //std::vector<sf::Texture> parallaxe;
 
@@ -31,6 +32,7 @@ class Game
         static Level m_level;
 
         static sf::View m_camera;
+        static sf::View m_cameraUI;
 
         static bool m_pause;
         static Character m_character;
@@ -40,6 +42,9 @@ class Game
         static ListDoodad<Wall> m_wallList;
 
         static std::vector<EstheticEffect*> m_aEstheticEffect;
+
+        static float m_uiBonusAngle;
+        static float m_uiBonusGlowingTimer;
 
     private:
         Game(void);

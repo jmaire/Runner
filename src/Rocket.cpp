@@ -113,7 +113,7 @@ void Rocket::update(float dt)
             explode();
 
         m_smokeTimer += dt;
-        if(m_smokeTimer > 0.02f)
+        if(m_smokeTimer > 0.01f)
         {
             m_smokeTimer = 0.f;
             createSmoke();

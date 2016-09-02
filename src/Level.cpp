@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "tools.h"
 
 Level::Level()
 {}
@@ -15,13 +16,14 @@ Level::Level(tinyxml2::XMLElement *elem)
 	tinyxml2::XMLElement *elemPosition = elemCharacter->FirstChildElement("position");
 	sf::Vector2f characterPosition = sf::Vector2f(elemPosition->DoubleAttribute("posX"),elemPosition->DoubleAttribute("posY"));
     m_character = Character(characterPosition);
-    m_yMin = characterPosition.y;
+    m_yMin = m_character.getBody().getYMin();
 
 	// Exit
 	tinyxml2::XMLElement *elemExit = elem->FirstChildElement("exit");
 	elemPosition = elemExit->FirstChildElement("position");
     sf::Vector2f exitPosition = sf::Vector2f(elemPosition->DoubleAttribute("posX"),elemPosition->DoubleAttribute("posY"));
     m_exit = Exit(exitPosition);
+    m_yMin = MY_MIN(m_yMin, m_exit.getBody().getYMin());
 
 	// Obstacle
     tinyxml2::XMLElement *elemWall = elem->FirstChildElement("wall");
@@ -38,9 +40,7 @@ Level::Level(tinyxml2::XMLElement *elem)
         Wall wall = Wall(wallDimension, wallPosition);
         wall.setDestructible(isDestructible);
         m_wallList.insereDoodad(wall);
-
-        if(wallPosition.y < m_yMin)
-            m_yMin = wallPosition.y;
+        m_yMin = MY_MIN(m_yMin, wall.getBody().getYMin());
 
         elemWall = elemWall->NextSiblingElement("wall");
     }
@@ -48,14 +48,17 @@ Level::Level(tinyxml2::XMLElement *elem)
     //m_yMin -= LEVEL_CAMERA_BORDER_OFFSET;
 
     // Bonus
-    tinyxml2::XMLElement *bonus = elem->FirstChildElement("bonus");
-    while(nullptr != bonus)
+    tinyxml2::XMLElement *elemBonus = elem->FirstChildElement("bonus");
+    while(nullptr != elemBonus)
     {
-        elemPosition = bonus->FirstChildElement("position");
+        elemPosition = elemBonus->FirstChildElement("position");
         sf::Vector2f bonusPosition = sf::Vector2f(elemPosition->DoubleAttribute("posX"),elemPosition->DoubleAttribute("posY"));
-        m_bonusList.insereDoodad(Bonus(bonusPosition));
+        Bonus bonus = Bonus(bonusPosition);
+        m_bonusList.insereDoodad(bonus);
 
-        bonus = bonus->NextSiblingElement("bonus");
+        m_yMin = MY_MIN(m_yMin, bonus.getBody().getYMin());
+
+        elemBonus = elemBonus->NextSiblingElement("bonus");
     }
 }
 
