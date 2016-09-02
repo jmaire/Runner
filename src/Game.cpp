@@ -220,10 +220,10 @@ void Game::render(sf::RenderWindow& window)
     /// render world
 
 	window.setView(m_camera);
-	m_character.render(window);
     m_exit.render(window);
-    m_wallList.render(window);
     m_bonusList.render(window);
+	m_character.render(window);
+    m_wallList.render(window);
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
         (*it)->render(window);
@@ -289,7 +289,17 @@ void Game::renderUI(sf::RenderWindow& window)
     glowingColor.a = 200 * (1.f - timeElaspedRatio);
 	bonusGlowingShape.setFillColor(glowingColor);
 
-    sf::Text bonusText = sf::Text("x0", RessourcesManager::getFont(), 48);
+	unsigned int bonusCount = 0;
+	std::vector<Bonus> bonusList = m_bonusList.getList();
+	for(std::vector<Bonus>::iterator it = bonusList.begin(); it != bonusList.end(); ++it)
+    {
+        if(it->isTaken())
+            bonusCount++;
+    }
+
+    char buff[8];
+    sprintf(buff,"x%d",bonusCount);
+    sf::Text bonusText = sf::Text(buff, RessourcesManager::getFont(), 48);
     bonusText.setPosition(sf::Vector2f(60.f, 0.f));
 
     window.setView(m_cameraUI);

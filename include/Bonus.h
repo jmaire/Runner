@@ -19,13 +19,17 @@ class Bonus : public Doodad
 
         ~Bonus(void);
 
+        virtual bool isTaken(void);
+        virtual void setTaken(bool taken);
+
         virtual void accept(Visitor& v);
-        virtual void collisionEvent(Doodad* doodad);
+        virtual void collisionEvent(Doodad& doodad);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 
     protected:
+        bool m_isTaken;
         float m_angle, m_glowingTimer;
 };
 

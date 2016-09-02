@@ -13,7 +13,7 @@ void VisitorBonus::visitBonus(Bonus* e)
 
 void VisitorBonus::visitCharacter(Character* e)
 {
-	m_doodad->setState(1);
+	m_doodad->setTaken(true);
 }
 
 void VisitorBonus::visitExit(Exit* e)

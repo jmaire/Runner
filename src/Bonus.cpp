@@ -3,6 +3,7 @@
 
 Bonus::Bonus()
 : Doodad()
+, m_isTaken(false)
 , m_angle(rand() % 90)
 , m_glowingTimer(0.f)
 {
@@ -18,15 +19,25 @@ Bonus::Bonus(sf::Vector2f pos)
 Bonus::~Bonus()
 {}
 
+bool Bonus::isTaken(void)
+{
+    return m_isTaken;
+}
+
+void Bonus::setTaken(bool taken)
+{
+    m_isTaken = taken;
+}
+
 void Bonus::accept(Visitor& v)
 {
 	v.visitBonus(this);
 }
 
-void Bonus::collisionEvent(Doodad* doodad)
+void Bonus::collisionEvent(Doodad& doodad)
 {
 	VisitorBonus v = VisitorBonus(this);
-	doodad->accept(v);
+	doodad.accept(v);
 }
 
 void Bonus::update(float dt)
@@ -40,6 +51,9 @@ void Bonus::update(float dt)
 
 void Bonus::render(sf::RenderWindow& window)
 {
+    if(isTaken())
+        return;
+
 	sf::Vector2f rectangle = m_body.getRectangle();
     sf::Vector2f position = m_body.getPosition();
 
