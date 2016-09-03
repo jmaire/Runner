@@ -7,9 +7,9 @@ class EstheticEffectSmoke : public EstheticEffect
 {
     public:
         EstheticEffectSmoke(float expirationTimer, float startSize, float endSize);
-        EstheticEffectSmoke();
+        EstheticEffectSmoke(void);
 
-        virtual ~EstheticEffectSmoke();
+        virtual ~EstheticEffectSmoke(void);
 
         virtual void setColor(sf::Color color);
 

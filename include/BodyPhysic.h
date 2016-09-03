@@ -9,14 +9,14 @@ class BodyPhysic : public Body
 {
     public:
         BodyPhysic(sf::Vector2f rec, sf::Vector2f pos);
-        BodyPhysic();
+        BodyPhysic(void);
 
-        virtual ~BodyPhysic();
+        virtual ~BodyPhysic(void);
 
-        virtual sf::Vector2f getVelocity();
-        virtual float getAngle();
-        virtual float getInvMass();
-        virtual float getRestitution();
+        virtual sf::Vector2f getVelocity(void);
+        virtual float getAngle(void);
+        virtual float getInvMass(void);
+        virtual float getRestitution(void);
 
         virtual void setVelocity(sf::Vector2f vel);
         virtual void setAngle(float angle);

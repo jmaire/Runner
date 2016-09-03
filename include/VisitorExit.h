@@ -13,7 +13,7 @@ class VisitorExit : public VisitorDoodad<Exit>
 {
 public:
     VisitorExit(Exit* exit);
-	VisitorExit();
+	VisitorExit(void);
 
 	virtual void visitBonus(Bonus* e);
 	virtual void visitCharacter(Character* e);

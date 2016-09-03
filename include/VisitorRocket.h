@@ -13,9 +13,9 @@ class VisitorRocket : public VisitorDoodad<Rocket>
 {
 public:
     VisitorRocket(Rocket* rocket);
-	VisitorRocket();
+	VisitorRocket(void);
 
-	virtual ~VisitorRocket();
+	virtual ~VisitorRocket(void);
 
 	virtual void visitBonus(Bonus* e);
 	virtual void visitCharacter(Character* e);

@@ -5,7 +5,8 @@
 #include "EstheticEffect.h"
 #include "Rocket.h"
 
-const float LEVEL_CAMERA_BORDER_OFFSET = 60.f;
+//const float LEVEL_CAMERA_BORDER_OFFSET = 60.f;
+const sf::Color GAME_BACKGROUND_COLOR = sf::Color(20, 30, 60, 255);
 
 class Game
 {

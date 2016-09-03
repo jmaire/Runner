@@ -13,7 +13,7 @@ class VisitorBonus : public VisitorDoodad<Bonus>
 {
 public:
     VisitorBonus(Bonus* bonus);
-	VisitorBonus();
+	VisitorBonus(void);
 
 	virtual void visitBonus(Bonus* e);
 	virtual void visitCharacter(Character* e);

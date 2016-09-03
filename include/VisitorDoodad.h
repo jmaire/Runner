@@ -8,13 +8,13 @@ template <typename T=Doodad>
 class VisitorDoodad : public Visitor
 {
     public:
-        virtual ~VisitorDoodad();
+        virtual ~VisitorDoodad(void);
 
     protected:
         T* m_doodad;
 
         VisitorDoodad(T* doodad);
-        VisitorDoodad();
+        VisitorDoodad(void);
 };
 
 #include "../src/VisitorDoodad.tpp"

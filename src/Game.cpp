@@ -82,11 +82,14 @@ void Game::collision()
 	m_bonusList.collision(m_character);
 	m_exit.collision(m_character);
 
+	//m_rocketList.collisionList(m_wallList);
+
 	std::vector<Rocket>& rocketList = m_rocketList.getList();
 	for(unsigned int i=0; i<rocketList.size(); i++)
     {
         m_wallList.collision(rocketList.at(i));
     }
+
 }
 
 int Game::startLevel(sf::RenderWindow& window)
@@ -157,7 +160,7 @@ int Game::startLevel(sf::RenderWindow& window)
 			update(elapsed.asSeconds());
 		}
 
-		window.clear(sf::Color(50, 50, 50));
+		window.clear(GAME_BACKGROUND_COLOR);
 		computeCamera(window);
 		render(window);
 		renderUI(window);

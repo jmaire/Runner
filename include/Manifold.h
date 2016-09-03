@@ -8,14 +8,14 @@ const float CORRECTION_PERCENT = 1.f;
 class Manifold
 {
     public:
-        Manifold();
+        Manifold(void);
         Manifold(BodyPhysic& body1, BodyPhysic& body2);
 
-        ~Manifold();
+        ~Manifold(void);
 
-        void computeManifold();
-        void applyImpulse();
-        void positionalCorrection();
+        void computeManifold(void);
+        void applyImpulse(void);
+        void positionalCorrection(void);
 
     private:
         BodyPhysic *m_body1, *m_body2;

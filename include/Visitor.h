@@ -12,7 +12,7 @@ class Wall;
 class Visitor
 {
     public:
-        virtual ~Visitor();
+        virtual ~Visitor(void);
 
         virtual void visitBonus(Bonus* e) = 0;
         virtual void visitCharacter(Character* e) = 0;
@@ -21,7 +21,7 @@ class Visitor
         virtual void visitWall(Wall* e) = 0;
 
     protected:
-        Visitor();
+        Visitor(void);
 
 };
 

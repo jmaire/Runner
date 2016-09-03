@@ -72,7 +72,7 @@
 		</bonus>
 
 		<bonus>
-			<position posX="250" posY="400" />
+			<position posX="950" posY="210" />
 		</bonus>
 	</level>
 </world>

@@ -7,15 +7,15 @@ class World
 {
     public:
         World(std::string name);
-        World();
+        World(void);
 
-        virtual ~World();
+        virtual ~World(void);
 
         void insereLevel(Level level);
         Level getLevel(unsigned int ind);
         std::vector<Level> getLevelList();
 
-        static bool loadWorlds();
+        static bool loadWorlds(void);
         static bool loadWorldFile(const std::string& worldFileName);
 
         static World getWorld(unsigned int ind);
@@ -28,7 +28,6 @@ class World
         static std::vector<World> m_aWorld;
 
         static void insereWorld(std::string name);
-
 
 };
 

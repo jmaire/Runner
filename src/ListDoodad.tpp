@@ -38,6 +38,13 @@ void ListDoodad<T>::collision(Doodad& doodad)
 }
 
 template <typename T>
+void ListDoodad<T>::collisionList(ListDoodad<Doodad>& doodad)
+{
+    for(unsigned int i=0; i<m_doodads.size(); i++)
+        doodad.collision(m_doodads.at(i));
+}
+
+template <typename T>
 EstheticEffect* ListDoodad<T>::popEstheticEffect()
 {
     for(typename std::vector<T>::iterator it=m_doodads.begin(); it!=m_doodads.end(); ++it)

@@ -9,7 +9,7 @@ class EstheticEffectDebris : public EstheticEffect
         EstheticEffectDebris(float expirationTimer);
         EstheticEffectDebris(void);
 
-        virtual ~EstheticEffectDebris();
+        virtual ~EstheticEffectDebris(void);
 
         virtual void setColor(sf::Color color);
 

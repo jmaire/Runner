@@ -7,22 +7,22 @@
 class RessourcesManager
 {
     public:
-        virtual ~RessourcesManager();
+        virtual ~RessourcesManager(void);
 
         static void load(std::string dir);
         static void addPlan(const char* filepath);
 
         static std::vector<sf::Texture> plan;
 
-        static sf::Texture& getCursor();
-        static sf::Font& getFont();
+        static sf::Texture& getCursor(void);
+        static sf::Font& getFont(void);
 
     protected:
         static sf::Texture m_cursor;
         static sf::Font m_font;
 
     private:
-        RessourcesManager();
+        RessourcesManager(void);
 
 };
 

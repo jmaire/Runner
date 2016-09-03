@@ -9,7 +9,7 @@ const float ROCKET_SIZE = 12.f;
 const sf::Vector2f ROCKET_RECTANGLE = sf::Vector2f(ROCKET_SIZE*1.5f, ROCKET_SIZE);
 const float ROCKET_VELOCITY = 800.f;
 const float ROCKET_FRICTION = 0.01f;
-const sf::Color ROCKET_COLOR = sf::Color(100, 150, 50, 255);
+const sf::Color ROCKET_COLOR = sf::Color(90, 125, 90, 255);
 
 const float ROCKET_EXPLOSION_SIZE = 60.f;
 const sf::Vector2f ROCKET_EXPLOSION_RECTANGLE = sf::Vector2f(ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_SIZE);

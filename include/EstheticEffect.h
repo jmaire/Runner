@@ -10,11 +10,11 @@ class EstheticEffect : public Entity
 {
     public:
         EstheticEffect(float expirationTimer);
-        EstheticEffect();
+        EstheticEffect(void);
 
-        virtual ~EstheticEffect();
+        virtual ~EstheticEffect(void);
 
-        virtual bool hasExpired();
+        virtual bool hasExpired(void);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);

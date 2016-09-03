@@ -9,22 +9,22 @@ const float CHARACTER_MASS = 5.f;
 const float CHARACTER_SIZE = 30.f;
 const sf::Vector2f CHARACTER_RECTANGLE = sf::Vector2f(CHARACTER_SIZE, CHARACTER_SIZE);
 const float VELOCITY_X = 250.f;
-const sf::Color CHARACTER_COLOR = sf::Color(0, 0, 255, 255);
+const sf::Color CHARACTER_COLOR = sf::Color(60, 120, 150, 255);
 //const int CHARACTER_GRAY = 0.299*CHARACTER_COLOR.r + 0.587*CHARACTER_COLOR.g + 0.587*CHARACTER_COLOR.b;
 //const sf::Color CHARACTER_GRAY_COLOR = sf::Color(CHARACTER_GRAY, CHARACTER_GRAY, CHARACTER_GRAY, CHARACTER_COLOR.a);
 
 class Character : public Doodad
 {
 public:
-	Character();
+	Character(void);
 	Character(sf::Vector2f pos);
 
-	virtual ~Character();
+	virtual ~Character(void);
 
     void setRun(bool isRunning);
 
 	void setDead(bool isDead);
-	bool isDead();
+	bool isDead(void);
 
 	Rocket launchRocket(sf::RenderWindow& window);
 

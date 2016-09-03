@@ -13,9 +13,9 @@ class VisitorWall : public VisitorDoodad<Wall>
 {
     public:
         VisitorWall(Wall* wall);
-        VisitorWall();
+        VisitorWall(void);
 
-        virtual ~VisitorWall();
+        virtual ~VisitorWall(void);
 
         virtual void visitBonus(Bonus* e);
         virtual void visitCharacter(Character* e);

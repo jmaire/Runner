@@ -8,17 +8,17 @@
 class Body
 {
     public:
-        Body();
+        Body(void);
         Body(sf::Vector2f rec, sf::Vector2f pos);
 
-        virtual ~Body();
+        virtual ~Body(void);
 
-        virtual sf::Vector2f getRectangle();
-        virtual sf::Vector2f getPosition();
-        virtual float getXMin();
-        virtual float getXMax();
-        virtual float getYMin();
-        virtual float getYMax();
+        virtual sf::Vector2f getRectangle(void);
+        virtual sf::Vector2f getPosition(void);
+        virtual float getXMin(void);
+        virtual float getXMax(void);
+        virtual float getYMin(void);
+        virtual float getYMax(void);
 
         virtual void setRectangle(sf::Vector2f rec);
         virtual void setPosition(sf::Vector2f pos);
