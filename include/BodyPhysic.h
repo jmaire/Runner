@@ -14,10 +14,13 @@ class BodyPhysic : public Body
         virtual ~BodyPhysic();
 
         virtual sf::Vector2f getVelocity();
+        virtual float getAngle();
         virtual float getInvMass();
         virtual float getRestitution();
 
         virtual void setVelocity(sf::Vector2f vel);
+        virtual void setAngle(float angle);
+        virtual void setAngularVelocity(float angVel);
         virtual void setMass(float mass);
         virtual void setInvMass(float invMass);
         virtual void setFriction(float fri);
@@ -28,6 +31,7 @@ class BodyPhysic : public Body
 
     protected:
         sf::Vector2f m_velocity;
+        float m_angle, m_angularVelocity;
 
         float m_invMass;
         float m_friction, m_restitution;

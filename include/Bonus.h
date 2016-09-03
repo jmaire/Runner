@@ -30,7 +30,7 @@ class Bonus : public Doodad
 
     protected:
         bool m_isTaken;
-        float m_angle, m_glowingTimer;
+        float m_glowingTimer;
 };
 
 #endif // BONUS_H

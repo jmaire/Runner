@@ -42,11 +42,19 @@ void Game::initLevel()
 
 void Game::collectEstheticEffect()
 {
-    EstheticEffect* ee = m_rocketList.popEstheticEffect();
+    EstheticEffect* ee;
+    ee = m_rocketList.popEstheticEffect();
     while(nullptr != ee)
     {
         m_aEstheticEffect.push_back(ee);
         ee = m_rocketList.popEstheticEffect();
+    }
+
+    ee = m_wallList.popEstheticEffect();
+    while(nullptr != ee)
+    {
+        m_aEstheticEffect.push_back(ee);
+        ee = m_wallList.popEstheticEffect();
     }
 }
 
@@ -91,10 +99,10 @@ int Game::startLevel(sf::RenderWindow& window)
 	{
 		if(m_character.isDead())
 			return 0;
-
+/*
 		if(2 == m_character.getState())
 			return 1;
-
+*/
 		// Compute all collisions
 		collision();
 
@@ -170,6 +178,7 @@ void Game::update(float dt)
     if(charBody.getXMin() > x_max)
         m_character.setDead(true);
 
+    collectEstheticEffect();
     m_bonusList.update(dt);
     m_character.update(dt);
     m_exit.update(dt);

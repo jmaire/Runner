@@ -20,16 +20,16 @@ void EstheticEffectSmoke::setColor(sf::Color color)
     m_color = color;
 }
 
-void EstheticEffectSmoke::setVelocity(sf::Vector2f velocity)
-{
-    m_velocity = velocity;
-}
-
 void EstheticEffectSmoke::update(float dt)
 {
+    m_body.update(dt);
     m_elaspedTime += dt;
     if(hasExpired())
         toDestroy(true);
+
+    float timeElaspedRatio = m_elaspedTime / m_expirationTimer;
+    float smokeSize = m_startSize + (m_endSize - m_startSize) * timeElaspedRatio;
+    m_body.setRectangle(sf::Vector2f(smokeSize, smokeSize));
 }
 
 void EstheticEffectSmoke::render(sf::RenderWindow& window)
@@ -37,11 +37,9 @@ void EstheticEffectSmoke::render(sf::RenderWindow& window)
     if(hasExpired())
         return;
 
+    sf::RectangleShape shape = getRectangleShapeForWindow(window, m_body.getRectangle(), m_body.getPosition());
+
     float timeElaspedRatio = m_elaspedTime / m_expirationTimer;
-
-    float smokeSize = m_startSize + (m_endSize - m_startSize) * timeElaspedRatio;
-    sf::RectangleShape shape = getRectangleShapeForWindow(window, sf::Vector2f(smokeSize, smokeSize), m_position);
-
     m_color.a = 150 * (1 - timeElaspedRatio);
     shape.setFillColor(m_color);
 

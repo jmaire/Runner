@@ -4,8 +4,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Entity.h"
-#include <BodyPhysic.h>
-#include <EstheticEffect.h>
+#include "EstheticEffect.h"
 
 const float COLLISION_APPROXIMATION = 2.f;
 
@@ -15,14 +14,6 @@ class Doodad : public Entity
 {
     public:
         virtual ~Doodad(void);
-
-        virtual BodyPhysic& getBody(void);
-        virtual unsigned int getState(void);
-
-        virtual void setBody(BodyPhysic body);
-        virtual void setState(unsigned int state);
-        virtual void setRectangle(sf::Vector2f rectangle);
-        virtual void setPosition(sf::Vector2f position);
 
         virtual bool isBetweenBorder(float borderLeft, float borderRight, float borderBottom);
 
@@ -40,9 +31,6 @@ class Doodad : public Entity
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        BodyPhysic m_body; //TODO
-        unsigned int m_state;
-
         std::vector<EstheticEffect*> m_aEstheticEffect;
 
         Doodad(void);

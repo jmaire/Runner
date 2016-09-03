@@ -13,11 +13,14 @@ void VisitorExit::visitBonus(Bonus* e)
 
 void VisitorExit::visitCharacter(Character* e)
 {
+    // TODO
+    /*
     e->getBody().setRectangle(sf::Vector2f(e->getBody().getRectangle().x-3,e->getBody().getRectangle().y-3));
     if(0 == e->getBody().getRectangle().x)
     {
     	e->setState(2);
     }
+    */
 }
 
 void VisitorExit::visitExit(Exit* e)

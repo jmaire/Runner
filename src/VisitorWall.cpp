@@ -36,7 +36,10 @@ void VisitorWall::visitRocket(Rocket* e)
     if(e->isExploding())
     {
         if(m_doodad->isDestructible())
+        {
             m_doodad->toDestroy(true);
+            m_doodad->createDebris();
+        }
     }
     else
         e->explode();

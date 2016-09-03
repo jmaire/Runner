@@ -1,3 +1,4 @@
+#include "EstheticEffectDebris.h"
 #include "Wall.h"
 #include "tools.h"
 
@@ -27,6 +28,28 @@ void Wall::setDestructible(bool isDes)
 bool Wall::isDestructible()
 {
     return m_isDestructible;
+}
+
+void Wall::createDebris()
+{
+    //sf::Vector2f pos = m_body.getPosition();
+    sf::Vector2f pos = sf::Vector2f(m_body.getXMin() + WALL_DEBRIS_SIZE / 2.f, m_body.getYMin() + WALL_DEBRIS_SIZE / 2.f);
+    unsigned int xNumber = m_body.getRectangle().x / WALL_DEBRIS_SIZE;
+    unsigned int yNumber = m_body.getRectangle().y / WALL_DEBRIS_SIZE;
+
+    for(unsigned int i=0; i<xNumber; i++)
+    {
+        for(unsigned int j=0; j<yNumber; j++)
+        {
+            EstheticEffectDebris* ees = new EstheticEffectDebris(WALL_DEBRIS_SIZE);
+            ees->setPosition(sf::Vector2f(pos.x+i*WALL_DEBRIS_SIZE,pos.y+j*WALL_DEBRIS_SIZE));
+            ees->setRectangle(sf::Vector2f(WALL_DEBRIS_SIZE,WALL_DEBRIS_SIZE));
+            ees->setColor(WALL_DESTRUCTIBLE_COLOR);
+            ees->setAngularVelocity(rand()%200-100);
+            ees->setVelocity(sf::Vector2f(rand()%100-50,rand()%100-50));
+            m_aEstheticEffect.push_back(ees);
+        }
+    }
 }
 
 void Wall::accept(Visitor& v)

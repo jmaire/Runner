@@ -33,48 +33,38 @@
 		</wall>
 
 		<wall destructible="true">
-			<dimension width="50" height="50" />
-			<position posX="250" posY="50" />
+			<dimension width="80" height="80" />
+			<position posX="500" posY="250" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="100" height="50" />
-			<position posX="100" posY="150" />
+			<dimension width="50" height="25" />
+			<position posX="1100" posY="150" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="850" posY="50" />
+			<dimension width="50" height="25" />
+			<position posX="1200" posY="150" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1000" posY="50" />
+			<dimension width="50" height="25" />
+			<position posX="1300" posY="150" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1150" posY="50" />
+			<dimension width="50" height="25" />
+			<position posX="1400" posY="150" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1300" posY="50" />
+			<dimension width="50" height="25" />
+			<position posX="1500" posY="150" />
 		</wall>
-
+		
 		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1450" posY="50" />
-		</wall>
-
-		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1600" posY="50" />
-		</wall>
-
-		<wall destructible="true">
-			<dimension width="20" height="10" />
-			<position posX="1750" posY="50" />
+			<dimension width="50" height="25" />
+			<position posX="1600" posY="150" />
 		</wall>
 
 		<bonus>

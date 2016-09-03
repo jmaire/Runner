@@ -14,8 +14,6 @@ class EstheticEffect : public Entity
 
         virtual ~EstheticEffect();
 
-        virtual void setPosition(sf::Vector2f position);
-
         virtual bool hasExpired();
 
         virtual void update(float dt);
@@ -23,9 +21,7 @@ class EstheticEffect : public Entity
 
     protected:
         float m_elaspedTime, m_expirationTimer;
-        sf::Vector2f m_position;
 
-    private:
 };
 
 #endif // ESTHETICEFFECT_H

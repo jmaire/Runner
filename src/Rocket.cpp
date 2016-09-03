@@ -79,7 +79,8 @@ void Rocket::createExplosion()
         m_aEstheticEffect.push_back(ees);
     }
 
-    EstheticEffectExplosion* eee = new EstheticEffectExplosion(ROCKET_EXPLOSION_DURATION, ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_LAYOUT);
+    EstheticEffectExplosion* eee = new EstheticEffectExplosion(ROCKET_EXPLOSION_DURATION, ROCKET_EXPLOSION_LAYOUT);
+    eee->setRectangle(sf::Vector2f(ROCKET_EXPLOSION_SIZE, ROCKET_EXPLOSION_SIZE));
     eee->setPosition(m_body.getPosition());
     m_aEstheticEffect.push_back(eee);
 }

@@ -3,41 +3,11 @@
 #include <Doodad.h>
 
 Doodad::Doodad()
-: m_state(0)
+: Entity()
 {}
 
 Doodad::~Doodad()
 {}
-
-BodyPhysic& Doodad::getBody()
-{
-	return m_body;
-}
-
-unsigned int Doodad::getState()
-{
-	return m_state;
-}
-
-void Doodad::setBody(BodyPhysic body)
-{
-	m_body = body;
-}
-
-void Doodad::setState(unsigned int state)
-{
-	m_state = state;
-}
-
-void Doodad::setRectangle(sf::Vector2f rectangle)
-{
-    m_body.setRectangle(rectangle);
-}
-
-void Doodad::setPosition(sf::Vector2f position)
-{
-    m_body.setPosition(position);
-}
 
 bool Doodad::isBetweenBorder(float borderLeft, float borderRight, float borderBottom)
 {

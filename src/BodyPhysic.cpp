@@ -2,6 +2,8 @@
 
 BodyPhysic::BodyPhysic(sf::Vector2f rec, sf::Vector2f pos)
 : Body(rec, pos)
+, m_angle(0.f)
+, m_angularVelocity(0.f)
 , m_invMass(0.f)
 , m_friction(0.f)
 , m_restitution(0.f)
@@ -20,6 +22,11 @@ sf::Vector2f BodyPhysic::getVelocity()
 	return m_velocity;
 }
 
+float BodyPhysic::getAngle()
+{
+    return m_angle;
+}
+
 float BodyPhysic::getInvMass()
 {
 	return m_invMass;
@@ -35,9 +42,19 @@ void BodyPhysic::setVelocity(sf::Vector2f vel)
 	m_velocity = vel;
 }
 
+void BodyPhysic::setAngle(float angle)
+{
+    m_angle = angle;
+}
+
+void BodyPhysic::setAngularVelocity(float angVel)
+{
+    m_angularVelocity = angVel;
+}
+
 void BodyPhysic::setMass(float mass)
 {
-    if(0 == mass)
+    if(0.f == mass)
         m_invMass = 0.f;
     else
         m_invMass = 1.f / mass;
@@ -72,4 +89,5 @@ void BodyPhysic::update(float dt)
 	}
 
 	m_position += m_velocity * dt;
+	m_angle += fmod(m_angularVelocity * dt, 360.f);
 }

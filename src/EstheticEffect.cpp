@@ -12,11 +12,6 @@ EstheticEffect::EstheticEffect()
 EstheticEffect::~EstheticEffect()
 {}
 
-void EstheticEffect::setPosition(sf::Vector2f position)
-{
-    m_position = position;
-}
-
 bool EstheticEffect::hasExpired()
 {
     return m_elaspedTime >= m_expirationTimer;
@@ -24,6 +19,7 @@ bool EstheticEffect::hasExpired()
 
 void EstheticEffect::update(float dt)
 {
+    m_body.update(dt);
     m_elaspedTime += dt;
 }
 

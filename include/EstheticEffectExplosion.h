@@ -6,7 +6,7 @@
 class EstheticEffectExplosion : public EstheticEffect
 {
     public:
-        EstheticEffectExplosion(float expirationTimer, float explosionSize, unsigned int layoutNumber);
+        EstheticEffectExplosion(float expirationTimer, unsigned int layoutNumber);
         EstheticEffectExplosion(void);
 
         virtual ~EstheticEffectExplosion(void);
@@ -15,7 +15,7 @@ class EstheticEffectExplosion : public EstheticEffect
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        float m_explosionSize;
+        //float m_explosionSize;
         unsigned int m_layoutNumber;
 
 };

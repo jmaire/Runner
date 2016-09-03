@@ -34,11 +34,6 @@ void Exit::update(float dt)
 */
 void Exit::render(sf::RenderWindow& window)
 {
-	if(1 == m_state)
-	{
-		return;
-	}
-
 	unsigned int height = window.getSize().y;
 
 	sf::RectangleShape shape;
