@@ -5,7 +5,7 @@
 Manifold::Manifold()
 {}
 
-Manifold::Manifold(BodyPhysic& body1, BodyPhysic& body2)
+Manifold::Manifold(Body& body1, Body& body2)
 : m_body1(&body1)
 , m_body2(&body2)
 {

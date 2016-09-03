@@ -17,12 +17,12 @@ bool Entity::isPendingDestruction()
     return m_pendingDestruction;
 }
 
-BodyPhysic& Entity::getBody()
+Body& Entity::getBody()
 {
 	return m_body;
 }
 
-void Entity::setBody(BodyPhysic body)
+void Entity::setBody(Body body)
 {
     m_body = body;
 }

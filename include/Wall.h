@@ -3,6 +3,8 @@
 
 #include "VisitorWall.h"
 
+const sf::Color WALL_INDESTRUCTIBLE_COLOR = sf::Color(95, 75, 60, 255);
+const sf::Color WALL_DESTRUCTIBLE_COLOR = sf::Color(255, 200, 100, 255);
 const float WALL_DEBRIS_SIZE = 10.f;
 
 class Wall : public Doodad

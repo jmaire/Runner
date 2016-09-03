@@ -1,7 +1,7 @@
 #ifndef MANIFOLD_H
 #define MANIFOLD_H
 
-#include <BodyPhysic.h>
+#include <Body.h>
 
 const float CORRECTION_PERCENT = 1.f;
 
@@ -9,7 +9,7 @@ class Manifold
 {
     public:
         Manifold(void);
-        Manifold(BodyPhysic& body1, BodyPhysic& body2);
+        Manifold(Body& body1, Body& body2);
 
         ~Manifold(void);
 
@@ -18,7 +18,7 @@ class Manifold
         void positionalCorrection(void);
 
     private:
-        BodyPhysic *m_body1, *m_body2;
+        Body *m_body1, *m_body2;
         float m_penetration;
         sf::Vector2f m_normal;
 };

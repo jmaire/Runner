@@ -38,7 +38,7 @@ void VisitorRocket::visitCharacter(Character* e)
 	else
 		explodeVelocity = sf::Vector2f(0.f, -explodeValue);
 
-	BodyPhysic& body = e->getBody();
+	Body& body = e->getBody();
 	e->getBody().setVelocity(body.getVelocity() + explodeVelocity);
 }
 

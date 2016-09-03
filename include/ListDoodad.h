@@ -18,7 +18,7 @@ class ListDoodad
         virtual void insereDoodad(T doodad);
 
         virtual void collision(Doodad& doodad);
-        virtual void collisionList(ListDoodad<Doodad>& doodad);//
+        //virtual void collisionList(ListDoodad<Doodad>& doodad);
 
         virtual EstheticEffect* popEstheticEffect(void);
 

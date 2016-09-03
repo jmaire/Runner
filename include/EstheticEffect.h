@@ -1,9 +1,6 @@
 #ifndef ESTHETICEFFECT_H
 #define ESTHETICEFFECT_H
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include "Body.h"
 #include "Entity.h"
 
 class EstheticEffect : public Entity

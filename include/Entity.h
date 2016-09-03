@@ -2,7 +2,7 @@
 #define ENTITY_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "BodyPhysic.h"
+#include "Body.h"
 
 class Entity
 {
@@ -12,8 +12,8 @@ class Entity
         virtual void toDestroy(bool destroy);
         virtual bool isPendingDestruction(void);
 
-        virtual BodyPhysic& getBody(void);
-        virtual void setBody(BodyPhysic body);
+        virtual Body& getBody(void);
+        virtual void setBody(Body body);
         virtual void setRectangle(sf::Vector2f rectangle);
         virtual void setPosition(sf::Vector2f position);
         virtual void setVelocity(sf::Vector2f velocity);
@@ -24,7 +24,7 @@ class Entity
 
     protected:
         bool m_pendingDestruction;
-        BodyPhysic m_body;
+        Body m_body;
 
         Entity(void);
 };
