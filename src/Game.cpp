@@ -38,6 +38,7 @@ void Game::initLevel()
     m_wallList = m_level.getWallList();
 
     m_rocketList = ListDoodad<Rocket>();
+    m_aEstheticEffect.clear();
 }
 
 void Game::collectEstheticEffect()
@@ -55,6 +56,13 @@ void Game::collectEstheticEffect()
     {
         m_aEstheticEffect.push_back(ee);
         ee = m_wallList.popEstheticEffect();
+    }
+
+    ee = m_bonusList.popEstheticEffect();
+    while(nullptr != ee)
+    {
+        m_aEstheticEffect.push_back(ee);
+        ee = m_bonusList.popEstheticEffect();
     }
 }
 

@@ -41,7 +41,7 @@ void Wall::createDebris()
     {
         for(unsigned int j=0; j<yNumber; j++)
         {
-            EstheticEffectDebris* ees = new EstheticEffectDebris(WALL_DEBRIS_SIZE);
+            EstheticEffectDebris* ees = new EstheticEffectDebris(WALL_DEBRIS_DURATION);
             ees->setPosition(sf::Vector2f(pos.x+i*WALL_DEBRIS_SIZE,pos.y+j*WALL_DEBRIS_SIZE));
             ees->setRectangle(sf::Vector2f(WALL_DEBRIS_SIZE,WALL_DEBRIS_SIZE));
             ees->setColor(WALL_DESTRUCTIBLE_COLOR);

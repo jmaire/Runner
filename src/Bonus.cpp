@@ -1,4 +1,5 @@
 #include "Bonus.h"
+#include "EstheticEffectSmoke.h"
 #include "tools.h"
 
 Bonus::Bonus()

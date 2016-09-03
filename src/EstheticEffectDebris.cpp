@@ -28,7 +28,7 @@ void EstheticEffectDebris::render(sf::RenderWindow& window)
     sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
     shape.setRotation(m_body.getAngle());
 
-    m_color.a = 255 - (1 -  m_elaspedTime / m_expirationTimer);
+    m_color.a = 255 * (1 -  (float)(m_elaspedTime / m_expirationTimer));
     shape.setFillColor(m_color);
 
 	window.draw(shape);
