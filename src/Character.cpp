@@ -35,13 +35,13 @@ bool Character::isDead()
 {
     return m_isDead;
 }
-#include <stdio.h>//
+
 Rocket Character::launchRocket(sf::RenderWindow& window)
 {
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     mousePos.y = window.getSize().y - mousePos.y;
 
-    sf::Vector2f pos = m_body.getPosition();// + m_body.getRectangle() / 2.f;
+    sf::Vector2f pos = m_body.getPosition();
 
     sf::Vector2f trajectory = sf::Vector2f(mousePos.y-pos.y,mousePos.x-pos.x);
     float angle = atan2(trajectory.x, trajectory.y);
@@ -80,8 +80,17 @@ void Character::render(sf::RenderWindow& window)
 	sf::Vector2f rectangle = m_body.getRectangle();
     sf::Vector2f position = m_body.getPosition();
     sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
-
 	shape.setFillColor(CHARACTER_COLOR);
 
+	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    mousePos.y = window.getSize().y - mousePos.y;
+    sf::Vector2f trajectory = sf::Vector2f(mousePos.y - position.y, mousePos.x - position.x);
+    float angle = atan2(trajectory.x, trajectory.y);
+    sf::Vector2f weaponPosition = sf::Vector2f(position.x + cos(angle) * CHARACTER_WEAPON_LENGHT / 3.f, position.y + sin(angle) * CHARACTER_WEAPON_LENGHT / 3.f);
+    sf::RectangleShape weaponShape = getRectangleShapeForWindow(window, CHARACTER_WEAPON_RECTANGLE, weaponPosition);
+	weaponShape.setFillColor(CHARACTER_WEAPON_COLOR);
+	weaponShape.setRotation(-angle * 180.f / M_PI);
+
 	window.draw(shape);
+	window.draw(weaponShape);
 }

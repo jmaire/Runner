@@ -233,9 +233,9 @@ void Game::render(sf::RenderWindow& window)
 
 	window.setView(m_camera);
     m_exit.render(window);
+    m_wallList.render(window);
     m_bonusList.render(window);
 	m_character.render(window);
-    m_wallList.render(window);
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
         (*it)->render(window);

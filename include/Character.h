@@ -10,8 +10,9 @@ const float CHARACTER_SIZE = 30.f;
 const sf::Vector2f CHARACTER_RECTANGLE = sf::Vector2f(CHARACTER_SIZE, CHARACTER_SIZE);
 const float VELOCITY_X = 250.f;
 const sf::Color CHARACTER_COLOR = sf::Color(60, 120, 150, 255);
-//const int CHARACTER_GRAY = 0.299*CHARACTER_COLOR.r + 0.587*CHARACTER_COLOR.g + 0.587*CHARACTER_COLOR.b;
-//const sf::Color CHARACTER_GRAY_COLOR = sf::Color(CHARACTER_GRAY, CHARACTER_GRAY, CHARACTER_GRAY, CHARACTER_COLOR.a);
+const float CHARACTER_WEAPON_LENGHT = 25.f;
+const sf::Vector2f CHARACTER_WEAPON_RECTANGLE = sf::Vector2f(CHARACTER_WEAPON_LENGHT, 15.f);
+const sf::Color CHARACTER_WEAPON_COLOR = sf::Color(80, 150, 200, 255);
 
 class Character : public Doodad
 {
