@@ -1,7 +1,9 @@
 #include "Exit.h"
+#include "Visitor.h"
 
 Exit::Exit()
 : Doodad()
+, m_reached(false)
 {
     m_body.setRectangle(EXIT_RECTANGLE);
 }
@@ -15,23 +17,21 @@ Exit::Exit(sf::Vector2f pos)
 Exit::~Exit()
 {}
 
+bool Exit::isReached(void)
+{
+    return m_reached;
+}
+
+void Exit::setReached(bool reached)
+{
+    m_reached = reached;
+}
+
 void Exit::accept(Visitor& v)
 {
 	v.visitExit(this);
 }
 
-void Exit::collisionEvent(Doodad* doodad)
-{
-	VisitorExit v = VisitorExit(this);
-	doodad->accept(v);
-}
-/*
-void Exit::update(float dt)
-{
-	m_body.update(dt);
-	// TODO animation
-}
-*/
 void Exit::render(sf::RenderWindow& window)
 {
 	unsigned int height = window.getSize().y;

@@ -1,7 +1,8 @@
 #ifndef WALL_H
 #define WALL_H
 
-#include "VisitorWall.h"
+#include "Doodad.h"
+//#include "VisitorWall.h"
 
 const sf::Color WALL_INDESTRUCTIBLE_COLOR = sf::Color(95, 75, 60, 255);
 const sf::Color WALL_DESTRUCTIBLE_COLOR = sf::Color(255, 200, 100, 255);
@@ -22,7 +23,6 @@ class Wall : public Doodad
         virtual void createDebris(void);
 
         virtual void accept(Visitor& v);
-        virtual void collisionEvent(Doodad& doodad);
 
         virtual void render(sf::RenderWindow& window);
 

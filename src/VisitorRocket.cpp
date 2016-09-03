@@ -12,9 +12,6 @@ VisitorRocket::VisitorRocket()
 VisitorRocket::~VisitorRocket()
 {}
 
-void VisitorRocket::visitBonus(Bonus* e)
-{}
-
 void VisitorRocket::visitCharacter(Character* e)
 {
     if(!m_doodad->isExploding() || m_doodad->hadPropelledCharacter())
@@ -31,8 +28,7 @@ void VisitorRocket::visitCharacter(Character* e)
 	if(fabs(deltaX) > fabs(deltaY))
 		explodeValue /= 2.f;
 
-	sf::Vector2f explodeVelocity;// = sf::Vector2f(0.f ,ROCKET_EXPLOSION_VELOCITY*MY_MAX(1.f,deltaY/(deltaX+deltaY)));
-
+	sf::Vector2f explodeVelocity;
 	if(deltaY>0.f)
 		explodeVelocity = sf::Vector2f(0.f, explodeValue);
 	else
@@ -42,12 +38,17 @@ void VisitorRocket::visitCharacter(Character* e)
 	e->getBody().setVelocity(body.getVelocity() + explodeVelocity);
 }
 
-void VisitorRocket::visitExit(Exit* e)
-{}
-
-void VisitorRocket::visitRocket(Rocket* r)
-{}
-
 void VisitorRocket::visitWall(Wall* e)
-{}
+{
+    if(m_doodad->isExploding())
+    {
+        if(e->isDestructible())
+        {
+            e->toDestroy(true);
+            e->createDebris();
+        }
+    }
+    else
+        m_doodad->explode();
+}
 

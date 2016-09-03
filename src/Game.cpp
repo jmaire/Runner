@@ -85,19 +85,19 @@ void Game::computeCamera(sf::RenderWindow& window)
 
 void Game::collision()
 {
-	m_wallList.collision(m_character);
 	m_rocketList.collision(m_character);
-	m_bonusList.collision(m_character);
-	m_exit.collision(m_character);
+	m_character.collision(m_exit);
 
-	//m_rocketList.collisionList(m_wallList);
+    std::vector<Bonus>& bonusList = m_bonusList.getList();
+    for(std::vector<Bonus>::iterator it=bonusList.begin(); it!=bonusList.end(); ++it)
+        m_character.collision(*it);
 
-	std::vector<Rocket>& rocketList = m_rocketList.getList();
-	for(unsigned int i=0; i<rocketList.size(); i++)
+    std::vector<Wall>& wallList = m_wallList.getList();
+    for(std::vector<Wall>::iterator it=wallList.begin(); it!=wallList.end(); ++it)
     {
-        m_wallList.collision(rocketList.at(i));
+        m_character.collision(*it);
+        m_rocketList.collision(*it);
     }
-
 }
 
 int Game::startLevel(sf::RenderWindow& window)

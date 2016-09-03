@@ -1,7 +1,8 @@
 #ifndef EXIT_H
 #define EXIT_H
 
-#include "VisitorExit.h"
+#include "Doodad.h"
+//#include "VisitorExit.h"
 
 const float EXIT_SIZE = 15.f;
 const sf::Vector2f EXIT_RECTANGLE = sf::Vector2f(EXIT_SIZE, EXIT_SIZE*9);
@@ -15,11 +16,15 @@ class Exit : public Doodad
 
         virtual ~Exit(void);
 
-        virtual void accept(Visitor& v);
-        void collisionEvent(Doodad* doodad);
+        virtual bool isReached(void);
+        virtual void setReached(bool reached);
 
-        //virtual void update(float dt);
+        virtual void accept(Visitor& v);
+
         virtual void render(sf::RenderWindow& window);
+
+    protected:
+        bool m_reached;
 };
 
 #endif // EXIT_H

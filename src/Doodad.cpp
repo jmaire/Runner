@@ -57,12 +57,6 @@ void Doodad::collision(Doodad& doodad)
 		collisionEvent(doodad);
 }
 
-void Doodad::accept(Visitor& v)
-{}
-
-void Doodad::collisionEvent(Doodad& doodad)
-{}
-
 EstheticEffect* Doodad::popEstheticEffect()
 {
     if(m_aEstheticEffect.empty())
@@ -77,7 +71,3 @@ void Doodad::update(float dt)
 {
 	m_body.update(dt);
 }
-
-void Doodad::render(sf::RenderWindow& window)
-{}
-

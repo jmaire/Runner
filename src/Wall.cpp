@@ -1,4 +1,5 @@
 #include "EstheticEffectDebris.h"
+#include "Visitor.h"
 #include "Wall.h"
 #include "tools.h"
 
@@ -55,12 +56,6 @@ void Wall::createDebris()
 void Wall::accept(Visitor& v)
 {
 	v.visitWall(this);
-}
-
-void Wall::collisionEvent(Doodad& doodad)
-{
-	VisitorWall v = VisitorWall(this);
-	doodad.accept(v);
 }
 
 void Wall::render(sf::RenderWindow& window)

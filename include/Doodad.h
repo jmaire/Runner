@@ -22,13 +22,13 @@ class Doodad : public Entity
 
         virtual void collision(Doodad& doodad);
 
-        virtual void accept(Visitor& v);
-        virtual void collisionEvent(Doodad& doodad);
+        virtual void accept(Visitor& v) {};
+        virtual void collisionEvent(Doodad& doodad) {};
 
         virtual EstheticEffect* popEstheticEffect(void);
 
         virtual void update(float dt);
-        virtual void render(sf::RenderWindow& window);
+        virtual void render(sf::RenderWindow& window) {};
 
     protected:
         std::vector<EstheticEffect*> m_aEstheticEffect;

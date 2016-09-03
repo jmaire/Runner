@@ -11,7 +11,7 @@ class Manifold
         Manifold(void);
         Manifold(Body& body1, Body& body2);
 
-        ~Manifold(void);
+        virtual ~Manifold(void);
 
         void computeManifold(void);
         void applyImpulse(void);

@@ -1,5 +1,6 @@
 #include "Bonus.h"
 #include "EstheticEffectSmoke.h"
+#include "Visitor.h"
 #include "tools.h"
 
 Bonus::Bonus()
@@ -34,12 +35,6 @@ void Bonus::setTaken(bool taken)
 void Bonus::accept(Visitor& v)
 {
 	v.visitBonus(this);
-}
-
-void Bonus::collisionEvent(Doodad& doodad)
-{
-	VisitorBonus v = VisitorBonus(this);
-	doodad.accept(v);
 }
 
 void Bonus::update(float dt)

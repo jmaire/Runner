@@ -1,7 +1,8 @@
 #ifndef BONUS_H
 #define BONUS_H
 
-#include "VisitorBonus.h"
+#include "Doodad.h"
+//#include "VisitorBonus.h"
 
 const float BONUS_SIZE = 15.f;
 const float BONUS_ANGULAR_VELOCITY = 120.f;
@@ -17,13 +18,12 @@ class Bonus : public Doodad
         Bonus(void);
         Bonus(sf::Vector2f pos);
 
-        ~Bonus(void);
+        virtual ~Bonus(void);
 
         virtual bool isTaken(void);
         virtual void setTaken(bool taken);
 
         virtual void accept(Visitor& v);
-        virtual void collisionEvent(Doodad& doodad);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
