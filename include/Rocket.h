@@ -27,7 +27,8 @@ const sf::Color ROCKET_SMOKE_COLOR = sf::Color(150, 150, 150);
 
 
 // ROCKET LAUNCHER
-const float ROCKET_ACCELERATION = 3000.f;
+const float ROCKET_BASE_ACCELERATION = 1000.f;
+const float ROCKET_BONUS_ACCELERATION = 3000.f;
 
 class Rocket : public Doodad
 {

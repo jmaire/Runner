@@ -9,13 +9,14 @@ RocketLauncher::RocketLauncher()
     m_body.setRectangle(ROCKET_LAUNCHER_RECTANGLE);
 }
 
+RocketLauncher::RocketLauncher(sf::Vector2f pos)
+: RocketLauncher()
+{
+    m_body.setPosition(pos);
+}
+
 RocketLauncher::~RocketLauncher()
 {}
-
-Doodad* RocketLauncher::getTarget()
-{
-    return m_target;
-}
 
 void RocketLauncher::setTarget(Doodad* target)
 {
@@ -26,13 +27,7 @@ void RocketLauncher::launchRocket()
 {
     if(nullptr == m_target)
         return;
-/*
-    sf::Vector2f launcherPosition = m_body.getPosition();
-    sf::Vector2f targetPosition = m_target->getBody().getPosition();
-    sf::Vector2f trajectory = sf::Vector2f(targetPosition.y - launcherPosition.y, targetPosition.x - launcherPosition.x);
-    float angle = atan2(trajectory.x, trajectory.y);
-    sf::Vector2f vel = sf::Vector2f(cos(angle) * 1, sin(angle) * 1);
-*/
+
     Rocket *rocket = new Rocket(m_body.getPosition(), m_body.getVelocity());
     rocket->setTarget(m_target);
     m_rocketList.push_back(rocket);

@@ -21,6 +21,7 @@ class Level
         Character getCharacter();
         Exit getExit();
         ListDoodad<Bonus> getBonusList();
+        ListDoodad<RocketLauncher> getRocketLauncherList();
         ListDoodad<Wall> getWallList();
 
     protected:
@@ -30,6 +31,7 @@ class Level
         Character m_character;
         Exit m_exit;
         ListDoodad<Bonus> m_bonusList;
+        ListDoodad<RocketLauncher> m_rocketLauncherList;
         ListDoodad<Wall> m_wallList;
 
 };

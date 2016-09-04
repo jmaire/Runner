@@ -36,12 +36,14 @@ void Game::initLevel()
     m_character = m_level.getCharacter();
     m_exit = m_level.getExit();
     m_bonusList = m_level.getBonusList();
+    m_rocketLauncherList = m_level.getRocketLauncherList();
     m_wallList = m_level.getWallList();
 
-    RocketLauncher rl = RocketLauncher();//
-    rl.setPosition(sf::Vector2f(600.f, 300.f));
-    rl.setTarget(&m_character);
-    m_rocketLauncherList.insereDoodad(rl);
+    std::vector<RocketLauncher>& rocketLauncherList = m_rocketLauncherList.getList();
+    for(std::vector<RocketLauncher>::iterator it=rocketLauncherList.begin(); it!=rocketLauncherList.end(); ++it)
+    {
+        it->setTarget(&m_character);
+    }
 
     m_rocketList = ListDoodad<Rocket>();
     m_aEstheticEffect.clear();
@@ -215,15 +217,16 @@ void Game::update(float dt)
     if(charBody.getXMin() > x_max)
         m_character.setDead(true);
 
-    collectRocket();
     collectEstheticEffect();
     m_bonusList.update(dt);
     m_character.update(dt);
     m_exit.update(dt);
+
     m_rocketLauncherList.update(dt);
+    collectRocket();
+
     m_rocketList.update(dt);
     m_wallList.update(dt);
-    collectRocket();
     collectEstheticEffect();
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )

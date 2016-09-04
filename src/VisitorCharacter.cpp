@@ -17,9 +17,11 @@ void VisitorCharacter::visitBonus(Bonus* e)
     e->setTaken(true);
 }
 
+#include <stdio.h>//
 void VisitorCharacter::visitExit(Exit* e)
 {
     e->setReached(true);
+    printf("GG!\n");
 }
 
 void VisitorCharacter::visitWall(Wall* e)

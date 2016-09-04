@@ -9,70 +9,129 @@
 		</character>
 
 		<exit>
-			<position posX="2000" posY="120" />
+			<position posX="3000" posY="120" />
 		</exit>
 
-		<wall destructible="false">
-			<dimension width="800" height="50" />
-			<position posX="0" posY="-50" />
-		</wall>
-		
-		<wall destructible="false">
-			<dimension width="1000" height="80" />
-			<position posX="500" posY="150" />
-		</wall>
-		
-		<wall destructible="false">
-			<dimension width="300" height="20" />
-			<position posX="1800" posY="100" />
-		</wall>
-		
-		<wall destructible="false">
-			<dimension width="1000" height="20" />
-			<position posX="500" posY="350" />
-		</wall>
+		<walls>
+			<wall destructible="false">
+				<dimension width="800" height="50" />
+				<position posX="0" posY="-50" />
+			</wall>
+			
+			<wall destructible="false">
+				<dimension width="1000" height="80" />
+				<position posX="500" posY="150" />
+			</wall>
+			
+			<wall destructible="false">
+				<dimension width="200" height="20" />
+				<position posX="2500" posY="150" />
+			</wall>
+			
+			<wall destructible="false">
+				<dimension width="200" height="20" />
+				<position posX="2200" posY="120" />
+			</wall>
+			
+			<wall destructible="false">
+				<dimension width="1000" height="20" />
+				<position posX="500" posY="350" />
+			</wall>
 
-		<wall destructible="true">
-			<dimension width="80" height="80" />
-			<position posX="500" posY="250" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1100" posY="150" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1200" posY="150" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1300" posY="150" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1400" posY="150" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1500" posY="150" />
-		</wall>
-		
-		<wall destructible="true">
-			<dimension width="50" height="25" />
-			<position posX="1600" posY="150" />
-		</wall>
+			<wall destructible="true">
+				<dimension width="10" height="50" />
+				<position posX="-50" posY="300" />
+			</wall>
 
-		<bonus>
-			<position posX="100" posY="250" />
-		</bonus>
+			<wall destructible="true">
+				<dimension width="20" height="80" />
+				<position posX="500" posY="250" />
+			</wall>
 
-		<bonus>
-			<position posX="950" posY="210" />
-		</bonus>
+			<wall destructible="true">
+				<dimension width="20" height="80" />
+				<position posX="600" posY="250" />
+			</wall>
+
+			<wall destructible="true">
+				<dimension width="20" height="80" />
+				<position posX="700" posY="250" />
+			</wall>
+
+			<wall destructible="true">
+				<dimension width="20" height="80" />
+				<position posX="800" posY="250" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1100" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1200" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1300" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1400" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1500" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1600" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1700" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1800" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="1900" posY="150" />
+			</wall>
+			
+			<wall destructible="true">
+				<dimension width="50" height="25" />
+				<position posX="2000" posY="150" />
+			</wall>
+		</walls>
+
+		<rocketLaunchers>
+			<rocketLauncher>
+				<position posX="-200" posY="300" />
+			</rocketLauncher>
+
+			<rocketLauncher>
+				<position posX="1000" posY="400" />
+			</rocketLauncher>
+		</rocketLaunchers>
+
+		<bonuss>
+			<bonus>
+				<position posX="100" posY="250" />
+			</bonus>
+
+			<bonus>
+				<position posX="950" posY="210" />
+			</bonus>
+		</bonuss>
 	</level>
 </world>

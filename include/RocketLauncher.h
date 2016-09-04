@@ -17,10 +17,10 @@ class RocketLauncher : public Doodad
 {
     public:
         RocketLauncher(void);
+        RocketLauncher(sf::Vector2f pos);
 
         virtual ~RocketLauncher(void);
 
-        Doodad* getTarget(void);
         void setTarget(Doodad* target);
 
         void launchRocket(void);
