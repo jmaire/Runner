@@ -27,6 +27,7 @@ class Body
         virtual void setRectangle(sf::Vector2f rec);
         virtual void setPosition(sf::Vector2f pos);
         virtual void setVelocity(sf::Vector2f vel);
+        virtual void setAcceleration(sf::Vector2f acc);
         virtual void setAngle(float angle);
         virtual void setAngularVelocity(float angVel);
         virtual void setMass(float mass);
@@ -35,17 +36,23 @@ class Body
         virtual void setRestitution(float res);
         virtual void setGravity(bool gravity);
 
+        virtual void useVelocityLimit(bool useVelocityLimit);
+        virtual void setVelocityLimit(float velocityLimit);
+
         virtual bool collide(Body& body);
 
         virtual void update(float dt);
 
     protected:
-        sf::Vector2f m_rectangle, m_position, m_velocity;
+        sf::Vector2f m_rectangle, m_position, m_velocity, m_acceleration;
         float m_angle, m_angularVelocity;
 
         float m_invMass;
         float m_friction, m_restitution;
         bool m_gravity;
+
+        float m_velocityLimit;
+        bool m_useVelocityLimit;
 };
 
 #endif // BODY_H

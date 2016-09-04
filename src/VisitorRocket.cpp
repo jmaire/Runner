@@ -38,6 +38,12 @@ void VisitorRocket::visitCharacter(Character* e)
 	e->getBody().setVelocity(body.getVelocity() + explodeVelocity);
 }
 
+void VisitorRocket::visitRocket(Rocket* e)
+{
+    m_doodad->explode();
+    e->explode();
+}
+
 void VisitorRocket::visitWall(Wall* e)
 {
     if(m_doodad->isExploding())

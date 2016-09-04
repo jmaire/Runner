@@ -34,9 +34,10 @@ template <typename T>
 void ListDoodad<T>::collision(Doodad& doodad)
 {
     for(unsigned int i=0; i<m_doodads.size(); i++)
-		m_doodads.at(i).collision(doodad);
+        if(&(m_doodads.at(i)) != &doodad)
+            m_doodads.at(i).collision(doodad);
 }
-
+/*
 template <typename T>
 void ListDoodad<T>::collisionVector(std::vector<Doodad>& doodads)
 {
@@ -50,7 +51,7 @@ void ListDoodad<T>::collisionList(ListDoodad<Doodad>& doodads)
     for(unsigned int i=0; i<m_doodads.size(); i++)
         doodads.collision(m_doodads.at(i));
 }
-
+*/
 template <typename T>
 EstheticEffect* ListDoodad<T>::popEstheticEffect()
 {
@@ -82,3 +83,11 @@ void ListDoodad<T>::render(sf::RenderWindow& window)
     for(typename std::vector<T>::iterator it=m_doodads.begin(); it!=m_doodads.end(); ++it)
         it->render(window);
 }
+/*
+// RocketLauncher
+template <>
+Rocket* ListDoodad<RocketLauncher>::popRocket()
+{
+    return nullptr;
+}
+*/

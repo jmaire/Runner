@@ -10,6 +10,8 @@ Body::Body(sf::Vector2f rec, sf::Vector2f pos)
 , m_friction(0.f)
 , m_restitution(0.f)
 , m_gravity(false)
+, m_velocityLimit(0.f)
+, m_useVelocityLimit(false)
 {}
 
 Body::Body()
@@ -84,6 +86,11 @@ void Body::setVelocity(sf::Vector2f vel)
 	m_velocity = vel;
 }
 
+void Body::setAcceleration(sf::Vector2f acc)
+{
+    m_acceleration = acc;
+}
+
 void Body::setAngle(float angle)
 {
     m_angle = angle;
@@ -122,6 +129,17 @@ void Body::setGravity(bool gravity)
 	m_gravity = gravity;
 }
 
+void Body::useVelocityLimit(bool useVelocityLimit)
+{
+    m_useVelocityLimit = useVelocityLimit;
+}
+
+void Body::setVelocityLimit(float velocityLimit)
+{
+    m_velocityLimit = velocityLimit;
+    m_useVelocityLimit = true;
+}
+
 bool Body::collide(Body& body)
 {
 	if(getXMax() < body.getXMin()
@@ -137,11 +155,18 @@ bool Body::collide(Body& body)
 
 void Body::update(float dt)
 {
-	m_velocity *= (float)pow(1.f - m_friction, dt);
-	if(0 != m_gravity)
-	{
+	if(m_gravity)
 		m_velocity.y += GRAVITY_VALUE * dt;
-	}
+
+    m_velocity += m_acceleration * dt;
+	m_velocity *= (float)pow(1.f - m_friction, dt);
+
+    if(m_useVelocityLimit)
+    {
+        float velocityValue = sqrt(m_velocity.x * m_velocity.x + m_velocity.y * m_velocity.y);
+        if(velocityValue > m_velocityLimit)
+            m_velocity *= (m_velocityLimit / velocityValue);
+    }
 
 	m_position += m_velocity * dt;
 	m_angle += fmod(m_angularVelocity * dt, 360.f);

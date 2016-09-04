@@ -13,6 +13,7 @@ Character Game::m_character;
 Exit Game::m_exit;
 ListDoodad<Bonus> Game::m_bonusList;
 ListDoodad<Rocket> Game::m_rocketList;
+ListDoodad<RocketLauncher> Game::m_rocketLauncherList;
 ListDoodad<Wall> Game::m_wallList;
 std::vector<EstheticEffect*> Game::m_aEstheticEffect;
 
@@ -36,6 +37,11 @@ void Game::initLevel()
     m_exit = m_level.getExit();
     m_bonusList = m_level.getBonusList();
     m_wallList = m_level.getWallList();
+
+    RocketLauncher rl = RocketLauncher();//
+    rl.setPosition(sf::Vector2f(600.f, 300.f));
+    rl.setTarget(&m_character);
+    m_rocketLauncherList.insereDoodad(rl);
 
     m_rocketList = ListDoodad<Rocket>();
     m_aEstheticEffect.clear();
@@ -63,6 +69,20 @@ void Game::collectEstheticEffect()
     {
         m_aEstheticEffect.push_back(ee);
         ee = m_bonusList.popEstheticEffect();
+    }
+}
+
+void Game::collectRocket()
+{
+    std::vector<RocketLauncher>& rocketLauncherList = m_rocketLauncherList.getList();
+    for(std::vector<RocketLauncher>::iterator it=rocketLauncherList.begin(); it!=rocketLauncherList.end(); ++it)
+    {
+        Rocket* rocket = it->popRocket();
+        while(nullptr != rocket)
+        {
+            m_rocketList.insereDoodad(*rocket);
+            rocket = it->popRocket();
+        }
     }
 }
 
@@ -96,6 +116,12 @@ void Game::collision()
     for(std::vector<Wall>::iterator it=wallList.begin(); it!=wallList.end(); ++it)
     {
         m_character.collision(*it);
+        m_rocketList.collision(*it);
+    }
+
+    std::vector<Rocket>& rocketList = m_rocketList.getList();
+    for(std::vector<Rocket>::iterator it=rocketList.begin(); it!=rocketList.end(); ++it)
+    {
         m_rocketList.collision(*it);
     }
 }
@@ -189,12 +215,15 @@ void Game::update(float dt)
     if(charBody.getXMin() > x_max)
         m_character.setDead(true);
 
+    collectRocket();
     collectEstheticEffect();
     m_bonusList.update(dt);
     m_character.update(dt);
     m_exit.update(dt);
+    m_rocketLauncherList.update(dt);
     m_rocketList.update(dt);
     m_wallList.update(dt);
+    collectRocket();
     collectEstheticEffect();
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
@@ -243,12 +272,13 @@ void Game::render(sf::RenderWindow& window)
     m_exit.render(window);
     m_wallList.render(window);
     m_bonusList.render(window);
+    m_rocketLauncherList.render(window);
+    m_rocketList.render(window);
 	m_character.render(window);
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
         (*it)->render(window);
 
-    m_rocketList.render(window);
 
     /// drawing cursor
 

@@ -20,7 +20,7 @@ class VisitorRocket : public VisitorDoodad<Rocket>
         virtual void visitBonus(Bonus* e) {};
         virtual void visitCharacter(Character* e);
         virtual void visitExit(Exit* e) {};
-        virtual void visitRocket(Rocket* e) {};
+        virtual void visitRocket(Rocket* e);
         virtual void visitWall(Wall* e);
 };
 

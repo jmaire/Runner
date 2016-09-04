@@ -10,8 +10,8 @@ Rocket::Rocket()
 , m_isDone(false)
 , m_propelledCharacter(false)
 , m_rocketTimer(0.f)
-//, m_explosionTimer(0.f)
 , m_smokeTimer(0.f)
+, m_target(nullptr)
 {
     m_body.setRectangle(ROCKET_RECTANGLE);
     m_body.setMass(ROCKET_MASS);
@@ -28,6 +28,13 @@ Rocket::Rocket(sf::Vector2f pos, sf::Vector2f vel)
 
 Rocket::~Rocket()
 {}
+
+void Rocket::setTarget(Doodad* target)
+{
+    m_target = target;
+    m_body.setVelocityLimit(ROCKET_VELOCITY * 1.f);//
+    //m_body.setGravity(false);//
+}
 
 void Rocket::explode()
 {
@@ -98,6 +105,15 @@ void Rocket::collisionEvent(Doodad& doodad)
 
 void Rocket::update(float dt)
 {
+    if(nullptr != m_target)
+    {
+        sf::Vector2f rocketPosition = m_body.getPosition();
+        sf::Vector2f targetPosition = m_target->getBody().getPosition();
+        sf::Vector2f trajectory = sf::Vector2f(targetPosition.y - rocketPosition.y, targetPosition.x - rocketPosition.x);
+        float angle = atan2(trajectory.x, trajectory.y);
+        sf::Vector2f acc = sf::Vector2f(cos(angle) * ROCKET_ACCELERATION, sin(angle) * ROCKET_ACCELERATION);
+        m_body.setAcceleration(acc);
+    }
     m_body.update(dt);
 
     if(m_isExploding)
@@ -120,7 +136,6 @@ void Rocket::update(float dt)
             createSmoke();
         }
     }
-
 }
 
 void Rocket::render(sf::RenderWindow& window)

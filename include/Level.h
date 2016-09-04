@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Exit.h"
 #include "ListDoodad.h"
+#include "RocketLauncher.h"
 #include "Wall.h"
 #include "tinyxml2.h"
 

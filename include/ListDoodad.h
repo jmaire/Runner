@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "Doodad.h"
+#include "Rocket.h"
+#include "RocketLauncher.h"
 
 template <typename T=Doodad>
 class ListDoodad
@@ -18,13 +20,16 @@ class ListDoodad
         virtual void insereDoodad(T doodad);
 
         virtual void collision(Doodad& doodad);
-        virtual void collisionVector(std::vector<Doodad>& doodads);
-        virtual void collisionList(ListDoodad<Doodad>& doodads);
+        //virtual void collisionVector(std::vector<Doodad>& doodads);
+        //virtual void collisionList(ListDoodad<Doodad>& doodads);
 
         virtual EstheticEffect* popEstheticEffect(void);
 
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
+
+        // RocketLauncher
+        //virtual Rocket* popRocket(void);
 
     protected:
         std::vector<T> m_doodads;

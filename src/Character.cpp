@@ -47,7 +47,8 @@ Rocket Character::launchRocket(sf::RenderWindow& window)
     float angle = atan2(trajectory.x, trajectory.y);
     sf::Vector2f vel = sf::Vector2f(cos(angle)*ROCKET_VELOCITY,sin(angle)*ROCKET_VELOCITY);
 
-	return Rocket(pos, vel + m_body.getVelocity());
+	Rocket rocket = Rocket(pos, vel + m_body.getVelocity());
+	return rocket;
 }
 
 void Character::accept(Visitor& v)

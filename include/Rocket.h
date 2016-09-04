@@ -3,6 +3,7 @@
 
 #include "VisitorRocket.h"
 
+// COMMON
 const float ROCKET_DURATION = 3.f;
 const float ROCKET_MASS = 1.f;
 const float ROCKET_SIZE = 12.f;
@@ -22,6 +23,12 @@ const float ROCKET_SMOKE_STARTING_SIZE = 12.f;
 const float ROCKET_SMOKE_END_SIZE = 36.f;
 const sf::Color ROCKET_SMOKE_COLOR = sf::Color(150, 150, 150);
 
+// CHARACTER
+
+
+// ROCKET LAUNCHER
+const float ROCKET_ACCELERATION = 3000.f;
+
 class Rocket : public Doodad
 {
     public:
@@ -29,6 +36,8 @@ class Rocket : public Doodad
         Rocket(sf::Vector2f pos, sf::Vector2f vel);
 
         virtual ~Rocket(void);
+
+        void setTarget(Doodad* target);
 
         virtual void explode(void);
         virtual bool isExploding(void);
@@ -50,6 +59,7 @@ class Rocket : public Doodad
         float m_rocketTimer;
 
         float m_smokeTimer;
+        Doodad *m_target;
 };
 
 #endif // ROCKET_H
