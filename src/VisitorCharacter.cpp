@@ -32,8 +32,7 @@ void VisitorCharacter::visitWall(Wall* e)
 
 	if(e->isDoodadOn(*m_doodad))
         m_doodad->setRun(true);
-
-	if(e->isDoodadOnLeft(*m_doodad))
+	else if(e->isDoodadOnLeft(*m_doodad))
         m_doodad->setDead(true);
 }
 
