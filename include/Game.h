@@ -1,7 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <map>
 #include "Level.h"
+#include "Background.h"
 #include "EstheticEffect.h"
 #include "Rocket.h"
 
@@ -44,6 +46,7 @@ class Game
         static ListDoodad<RocketLauncher> m_rocketLauncherList;
         static ListDoodad<Wall> m_wallList;
 
+        static std::map<int,std::vector<Background*>> m_aBackground;
         static std::vector<EstheticEffect*> m_aEstheticEffect;
 
         static float m_uiBonusAngle;

@@ -1,4 +1,5 @@
 #include "Exit.h"
+#include "tools.h"
 #include "Visitor.h"
 
 Exit::Exit()
@@ -34,13 +35,11 @@ void Exit::accept(Visitor& v)
 
 void Exit::render(sf::RenderWindow& window)
 {
-	unsigned int height = window.getSize().y;
-
-	sf::RectangleShape shape;
-	shape.setSize(m_body.getRectangle());
-	sf::Vector2f pos = m_body.getPosition();
-	shape.setPosition(pos.x, height-pos.y - m_body.getRectangle().y);
+	sf::Vector2f rectangle = m_body.getRectangle();
+    sf::Vector2f position = m_body.getPosition();
+    sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
 	shape.setFillColor(EXIT_COLOR);
+
 	window.draw(shape);
 }
 

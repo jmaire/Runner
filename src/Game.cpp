@@ -15,6 +15,8 @@ ListDoodad<Bonus> Game::m_bonusList;
 ListDoodad<Rocket> Game::m_rocketList;
 ListDoodad<RocketLauncher> Game::m_rocketLauncherList;
 ListDoodad<Wall> Game::m_wallList;
+
+std::map<int,std::vector<Background*>> Game::m_aBackground;
 std::vector<EstheticEffect*> Game::m_aEstheticEffect;
 
 float Game::m_uiBonusAngle;
@@ -47,6 +49,21 @@ void Game::initLevel()
 
     m_rocketList = ListDoodad<Rocket>();
     m_aEstheticEffect.clear();
+    m_aBackground.clear();
+
+    Background *bg = new Background();//
+    bg->setDepth(-1);
+    bg->setRectangle(sf::Vector2f(100.f,400.f));
+    bg->setPosition(sf::Vector2f(0.f,0.f));
+    bg->setColor(sf::Color(200,200,0));
+    m_aBackground[-1].push_back(bg);
+
+	bg = new Background();//
+    bg->setDepth(-2);
+    bg->setRectangle(sf::Vector2f(200.f,600.f));
+    bg->setPosition(sf::Vector2f(0.f,200.f));
+    bg->setColor(sf::Color(150,150,0));
+    m_aBackground[-2].push_back(bg);
 }
 
 void Game::collectEstheticEffect()
@@ -102,7 +119,9 @@ void Game::computeCamera(sf::RenderWindow& window)
 	m_camera.setSize(width, height);
 	m_camera.setCenter(cameraCenter);
 
-    m_cameraUI.setViewport(sf::FloatRect(0, 0, 1, 1));
+    m_cameraUI.setViewport(sf::FloatRect(0.f, 0.f, width/(width+height), height/(width+height)));
+    //m_cameraUI.setCenter(width / 2.f, height / 2.f);
+    //m_cameraUI.setSize(width, height);
 }
 
 void Game::collision()
@@ -136,6 +155,9 @@ int Game::startLevel(sf::RenderWindow& window)
     m_pause = false;
 	while(window.isOpen())
 	{
+		if(!window.hasFocus())
+			m_pause = true;
+
 		if(m_character.isDead())
 			return 0;
 /*
@@ -150,27 +172,29 @@ int Game::startLevel(sf::RenderWindow& window)
 		{
 			if(event.type == sf::Event::Closed)
 				window.close();
+			else if(event.type == sf::Event::Resized || event.type == sf::Event::LostFocus)
+				m_pause = true;
 			else if(event.type == sf::Event::KeyPressed)
             {
                 switch(event.key.code)
                 {
-                // Pause / unpause
-                case sf::Keyboard::Escape:
-                    m_pause = !m_pause;
-                    break;
+					// Pause / unpause
+					case sf::Keyboard::Escape:
+						m_pause = !m_pause;
+						break;
 
-				// Restart level
-                case sf::Keyboard::BackSpace:
-                    return 0;
-                    break;
+					// Restart level
+					case sf::Keyboard::BackSpace:
+						return 0;
+						break;
 
-				// Return to menu
-                case sf::Keyboard::Delete:
-                    return 1;
-                    break;
+					// Return to menu
+					case sf::Keyboard::Delete:
+						return 1;
+						break;
 
-                default:
-	        		break;
+					default:
+						break;
 	    		}
 	  		}
             else if(event.type == sf::Event::MouseButtonPressed)
@@ -200,7 +224,7 @@ int Game::startLevel(sf::RenderWindow& window)
 		computeCamera(window);
 		render(window);
 		renderUI(window);
-
+		window.setView(m_camera);
 		window.display();
 	}
 
@@ -228,6 +252,23 @@ void Game::update(float dt)
     m_rocketList.update(dt);
     m_wallList.update(dt);
     collectEstheticEffect();
+
+    for(std::map<int,std::vector<Background*>>::iterator it=m_aBackground.begin(); it!=m_aBackground.end(); ++it)
+    {
+    	std::vector<Background*> aBG = it->second;
+    	for(std::vector<Background*>::iterator it2=aBG.begin(); it2!=aBG.end(); )
+		{
+			(*it2)->update(dt);
+			if((*it2)->isPendingDestruction())
+			{
+				Background* tmp = *it2;
+				aBG.erase(it2);
+				delete tmp;
+			}
+			else
+				++it2;
+		}
+    }
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
     {
@@ -271,6 +312,24 @@ void Game::render(sf::RenderWindow& window)
 */
     /// render world
 
+	sf::View paraView = m_camera;
+	float paraNegOffset = -2;
+
+	for(std::map<int,std::vector<Background*>>::iterator it=m_aBackground.begin(); it!=m_aBackground.end(); ++it)
+	{
+		int depth = it->first;
+    	for(std::vector<Background*>::iterator it2=it->second.begin(); it2!=it->second.end(); ++it2)
+		{
+			if(depth<0)
+			{
+				printf(":: %f\n",(float)(paraNegOffset-depth)/paraNegOffset);
+				paraView.setCenter(m_camera.getCenter().x * (paraNegOffset-depth)/paraNegOffset, m_camera.getCenter().y * (paraNegOffset-depth)/paraNegOffset);
+			}
+            window.setView(paraView);
+			(*it2)->render(window);
+		}
+	}
+
 	window.setView(m_camera);
     m_exit.render(window);
     m_wallList.render(window);
@@ -281,7 +340,6 @@ void Game::render(sf::RenderWindow& window)
 
     for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
         (*it)->render(window);
-
 
     /// drawing cursor
 
@@ -361,6 +419,10 @@ void Game::renderUI(sf::RenderWindow& window)
     window.draw(bonusGlowingShape);
     window.draw(bonusShape);
 
-
-    window.setView(m_camera);
+	if(m_pause)
+	{
+		sf::Text pauseText = sf::Text("Pause", RessourcesManager::getFont(), 64);
+		pauseText.setPosition(sf::Vector2f(window.getSize().x / 2.f, window.getSize().y / 2.f));
+		window.draw(pauseText);
+	}
 }

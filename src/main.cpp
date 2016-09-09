@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     World::loadWorlds();
 
 	// initialize
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Runner");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Runner", sf::Style::Titlebar | sf::Style::Close);
 	window.setKeyRepeatEnabled(false);
     window.setMouseCursorVisible(false);
     window.setFramerateLimit(120);
