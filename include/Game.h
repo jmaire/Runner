@@ -3,8 +3,9 @@
 
 #include <map>
 #include "Level.h"
-#include "Background.h"
-#include "EstheticEffect.h"
+#include "BackgroundManager.h"
+#include "EstheticEffectManager.h"
+//#include "EstheticEffect.h"
 #include "Rocket.h"
 
 //const float LEVEL_CAMERA_BORDER_OFFSET = 60.f;
@@ -46,8 +47,8 @@ class Game
         static ListDoodad<RocketLauncher> m_rocketLauncherList;
         static ListDoodad<Wall> m_wallList;
 
-        static std::map<int,std::vector<Background*>> m_aBackground;
-        static std::vector<EstheticEffect*> m_aEstheticEffect;
+        //static std::map<int,std::vector<Background*>> m_aBackground;
+        //static BackgroundManager m_bm;
 
         static float m_uiBonusAngle;
         static float m_uiBonusGlowingTimer;

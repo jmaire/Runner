@@ -1,31 +1,25 @@
 #include <SFML/Graphics/RectangleShape.hpp>
-#include "Background.h"
+#include "BackgroundDoodad.h"
 #include "tools.h"
 
-Background::Background()
+BackgroundDoodad::BackgroundDoodad()
 : Entity()
-, m_layoutDepth(0)
 {}
 
-Background::~Background()
+BackgroundDoodad::~BackgroundDoodad()
 {}
 
-void Background::setDepth(int depth)
-{
-	m_layoutDepth = depth;
-}
-
-void Background::setColor(sf::Color color)
+void BackgroundDoodad::setColor(sf::Color color)
 {
 	m_color = color;
 }
 
-void Background::update(float dt)
+void BackgroundDoodad::update(float dt)
 {
 	m_body.update(dt);
 }
 
-void Background::render(sf::RenderWindow& window)
+void BackgroundDoodad::render(sf::RenderWindow& window)
 {
 	/*
 	sf::Vector2f rectangle = m_body.getRectangle();

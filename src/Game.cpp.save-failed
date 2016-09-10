@@ -16,6 +16,9 @@ ListDoodad<Rocket> Game::m_rocketList;
 ListDoodad<RocketLauncher> Game::m_rocketLauncherList;
 ListDoodad<Wall> Game::m_wallList;
 
+BackgroundManager Game::m_bm;
+//std::map<int,std::vector<Background*>> Game::m_aBackground;
+
 float Game::m_uiBonusAngle;
 float Game::m_uiBonusGlowingTimer;
 
@@ -45,29 +48,25 @@ void Game::initLevel()
     }
 
     m_rocketList = ListDoodad<Rocket>();
-
     EstheticEffectManager::clear();
 
-    BackgroundManager::clear();
-    BackgroundManager::reset();
+    m_bm = BackgroundManager();
 
     BackgroundDoodad *bg = new BackgroundDoodad();//
+    bg->setDepth(-1);
     bg->setRectangle(sf::Vector2f(100.f,400.f));
     bg->setPosition(sf::Vector2f(0.f,0.f));
     bg->setColor(sf::Color(200,200,0));
-    BackgroundManager::insertBackgroundDoodad(-1, bg);
+    m_bm.addBackground(-1,bg);
+    //m_aBackground[-1].push_back(bg);
 
 	bg = new BackgroundDoodad();//
-    bg->setRectangle(sf::Vector2f(400.f,800.f));
-    bg->setPosition(sf::Vector2f(0.f,200.f));
-    bg->setColor(sf::Color(50,50,0));
-    BackgroundManager::insertBackgroundDoodad(-4, bg);
-
-	bg = new BackgroundDoodad();//
+    bg->setDepth(-2);
     bg->setRectangle(sf::Vector2f(200.f,600.f));
     bg->setPosition(sf::Vector2f(0.f,200.f));
     bg->setColor(sf::Color(150,150,0));
-    BackgroundManager::insertBackgroundDoodad(-2, bg);
+    m_bm.addBackground(-2,bg);
+    //m_aBackground[-2].push_back(bg);
 }
 
 void Game::collectEstheticEffect()
@@ -77,6 +76,7 @@ void Game::collectEstheticEffect()
     while(nullptr != ee)
     {
         EstheticEffectManager::insertEstheticEffect(ee);
+        //m_aEstheticEffect.push_back(ee);
         ee = m_rocketList.popEstheticEffect();
     }
 
@@ -257,7 +257,7 @@ void Game::update(float dt)
     m_wallList.update(dt);
     collectEstheticEffect();
 
-    BackgroundManager::update(dt);
+    m_bm.update(dt);
 /*
     for(std::map<int,std::vector<Background*>>::iterator it=m_aBackground.begin(); it!=m_aBackground.end(); ++it)
     {
@@ -277,7 +277,20 @@ void Game::update(float dt)
     }
 */
     EstheticEffectManager::update(dt);
-
+/*
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
+    {
+        (*it)->update(dt);
+        if((*it)->hasExpired())
+        {
+            EstheticEffect* tmp = *it;
+            m_aEstheticEffect.erase(it);
+            delete tmp;
+        }
+        else
+            ++it;
+    }
+*/
     m_uiBonusAngle += BONUS_ANGULAR_VELOCITY * dt;
     m_uiBonusGlowingTimer += dt;
     if(m_uiBonusGlowingTimer >= BONUS_GLOWING_DURATION)
@@ -306,9 +319,28 @@ void Game::render(sf::RenderWindow& window)
     }
 */
     /// render world
+    m_bm.setCharacterCamera(m_camera);
+    m_bm.render(window);
 
-	window.setView(m_camera);
-    BackgroundManager::render(window);
+/*
+	sf::View paraView = m_camera;
+	float paraNegOffset = -2;
+
+	for(std::map<int,std::vector<Background*>>::iterator it=m_aBackground.begin(); it!=m_aBackground.end(); ++it)
+	{
+		int depth = it->first;
+    	for(std::vector<Background*>::iterator it2=it->second.begin(); it2!=it->second.end(); ++it2)
+		{
+			if(depth<0)
+			{
+				printf(":: %f\n",(float)(paraNegOffset-depth)/paraNegOffset);
+				paraView.setCenter(m_camera.getCenter().x * (paraNegOffset-depth)/paraNegOffset, m_camera.getCenter().y * (paraNegOffset-depth)/paraNegOffset);
+			}
+            window.setView(paraView);
+			(*it2)->render(window);
+		}
+	}
+*/
 	window.setView(m_camera);
     m_exit.render(window);
     m_wallList.render(window);

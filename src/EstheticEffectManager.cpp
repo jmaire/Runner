@@ -1,0 +1,47 @@
+#include "EstheticEffectManager.h"
+
+std::vector<EstheticEffect*> EstheticEffectManager::m_aEstheticEffect;
+
+
+EstheticEffectManager::EstheticEffectManager()
+{}
+
+EstheticEffectManager::~EstheticEffectManager()
+{}
+
+void EstheticEffectManager::clear()
+{
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
+    {
+        EstheticEffect* tmp = *it;
+        m_aEstheticEffect.erase(it);
+        delete tmp;
+    }
+}
+
+void EstheticEffectManager::insertEstheticEffect(EstheticEffect* ee)
+{
+    m_aEstheticEffect.push_back(ee);
+}
+
+void EstheticEffectManager::update(float dt)
+{
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
+    {
+        (*it)->update(dt);
+        if((*it)->hasExpired())
+        {
+            EstheticEffect* tmp = *it;
+            m_aEstheticEffect.erase(it);
+            delete tmp;
+        }
+        else
+            ++it;
+    }
+}
+
+void EstheticEffectManager::render(sf::RenderWindow& window)
+{
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); ++it)
+        (*it)->render(window);
+}

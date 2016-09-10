@@ -1,15 +1,14 @@
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
+#ifndef BACKGROUNDDOODAD_H
+#define BACKGROUNDDOODAD_H
 
 #include "Entity.h"
 
-class Background : public Entity
+class BackgroundDoodad : public Entity
 {
 	public:
-		Background(void);
-		virtual ~Background(void);
+		BackgroundDoodad(void);
+		virtual ~BackgroundDoodad(void);
 
-		virtual void setDepth(int depth);
 		virtual void setColor(sf::Color color);
 		//virtual void setBase(float base);
 
@@ -17,8 +16,7 @@ class Background : public Entity
         virtual void render(sf::RenderWindow& window);
 
 	protected:
-        int m_layoutDepth;
         sf::Color m_color;
 };
 
-#endif // BACKGROUND_H
+#endif // BACKGROUNDDOODAD_H
