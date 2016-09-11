@@ -6,17 +6,18 @@
 class BackgroundDoodad : public Entity
 {
 	public:
-		BackgroundDoodad(void);
 		virtual ~BackgroundDoodad(void);
 
-		virtual void setColor(sf::Color color);
+		virtual void setDepth(int depth);
 		//virtual void setBase(float base);
 
 		virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 
 	protected:
-        sf::Color m_color;
+	    int m_depth;
+
+        BackgroundDoodad(void);
 };
 
 #endif // BACKGROUNDDOODAD_H

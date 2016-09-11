@@ -34,6 +34,7 @@ void BackgroundManager::reset()
 
 void BackgroundManager::insertBackgroundDoodad(int depth, BackgroundDoodad* background)
 {
+    background->setDepth(depth);
     m_aBackground[depth].push_back(background);
     m_minDepth = MY_MIN(m_minDepth, depth);
     m_maxDepth = MY_MAX(m_maxDepth, depth);
@@ -69,9 +70,9 @@ void BackgroundManager::render(sf::RenderWindow& window)
     	for(std::vector<BackgroundDoodad*>::iterator itBackground=aBackground.begin(); itBackground!=aBackground.end(); ++itBackground)
 		{
             sf::View depthView = characterView;
-			if(depth<0)
+			if(depth < 0)
 			{
-				depthView.setCenter(characterView.getCenter().x * (m_minDepth-depth)/m_minDepth, characterView.getCenter().y * (m_minDepth-depth)/m_minDepth);
+				depthView.setCenter(characterView.getCenter().x * 0.5 * (m_minDepth-depth)/m_minDepth, characterView.getCenter().y * 0.5 * (m_minDepth-depth)/m_minDepth);
 			}
             window.setView(depthView);
 			(*itBackground)->render(window);

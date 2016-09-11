@@ -1,3 +1,5 @@
+#include "BackgroundBuilding.h"//
+#include "BackgroundMoon.h"//
 #include "Game.h"
 #include "RessourcesManager.h"
 #include "tinyxml2.h"
@@ -51,23 +53,25 @@ void Game::initLevel()
     BackgroundManager::clear();
     BackgroundManager::reset();
 
-    BackgroundDoodad *bg = new BackgroundDoodad();//
-    bg->setRectangle(sf::Vector2f(100.f,400.f));
-    bg->setPosition(sf::Vector2f(0.f,0.f));
-    bg->setColor(sf::Color(200,200,0));
+    BackgroundBuilding *bg = new BackgroundBuilding();//
+    bg->setRectangle(sf::Vector2f(400.f,500.f));
+    bg->setPosition(sf::Vector2f(0.f, 250.f));
     BackgroundManager::insertBackgroundDoodad(-1, bg);
 
-	bg = new BackgroundDoodad();//
+	bg = new BackgroundBuilding();//
     bg->setRectangle(sf::Vector2f(400.f,800.f));
-    bg->setPosition(sf::Vector2f(0.f,200.f));
-    bg->setColor(sf::Color(50,50,0));
+    bg->setPosition(sf::Vector2f(0.f, 250.f));
     BackgroundManager::insertBackgroundDoodad(-4, bg);
 
-	bg = new BackgroundDoodad();//
+	bg = new BackgroundBuilding();//
     bg->setRectangle(sf::Vector2f(200.f,600.f));
-    bg->setPosition(sf::Vector2f(0.f,200.f));
-    bg->setColor(sf::Color(150,150,0));
+    bg->setPosition(sf::Vector2f(500.f, 250.f));
     BackgroundManager::insertBackgroundDoodad(-2, bg);
+
+    BackgroundMoon *bg2 = new BackgroundMoon();
+    bg2->setRectangle(sf::Vector2f(40.f,500.f));
+    bg2->setPosition(sf::Vector2f(200.f, 800.f));
+    BackgroundManager::insertBackgroundDoodad(-5,bg2);
 }
 
 void Game::collectEstheticEffect()
@@ -258,24 +262,6 @@ void Game::update(float dt)
     collectEstheticEffect();
 
     BackgroundManager::update(dt);
-/*
-    for(std::map<int,std::vector<Background*>>::iterator it=m_aBackground.begin(); it!=m_aBackground.end(); ++it)
-    {
-    	std::vector<Background*> aBG = it->second;
-    	for(std::vector<Background*>::iterator it2=aBG.begin(); it2!=aBG.end(); )
-		{
-			(*it2)->update(dt);
-			if((*it2)->isPendingDestruction())
-			{
-				Background* tmp = *it2;
-				aBG.erase(it2);
-				delete tmp;
-			}
-			else
-				++it2;
-		}
-    }
-*/
     EstheticEffectManager::update(dt);
 
     m_uiBonusAngle += BONUS_ANGULAR_VELOCITY * dt;
@@ -286,30 +272,8 @@ void Game::update(float dt)
 
 void Game::render(sf::RenderWindow& window)
 {
-    /// Drawing parallaxes
-/*
-    int iEnd = parallaxe.size();
-    float percent_para = 1./(iEnd+1);
-
-    sf::Sprite fond;
-    sf::View v;
-    v.setSize(window.getSize().x, window.getSize().y);
-
-    for(int i=0; i < iEnd; i++)
-    {
-        fond.setTextureRect({-1000, -1000, 2000*(i+1), 2000*(i+1)});
-        window.setView(v);
-        v.setCenter(m_camera.getCenter().x*percent_para*(i+1),m_camera.getCenter().y*percent_para*(i+1));
-        fond.setTexture(parallaxe[i]);
-        fond.setPosition(-500,-500);
-        window.draw(fond);
-    }
-*/
-    /// render world
-
 	window.setView(m_camera);
     BackgroundManager::render(window);
-	window.setView(m_camera);
     m_exit.render(window);
     m_wallList.render(window);
     m_bonusList.render(window);
@@ -318,8 +282,8 @@ void Game::render(sf::RenderWindow& window)
 	m_character.render(window);
 
 	EstheticEffectManager::render(window);
-    /// drawing cursor
 
+    /// drawing cursor
     if(!m_pause)
     {
         window.setMouseCursorVisible(false);
