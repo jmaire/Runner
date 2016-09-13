@@ -127,9 +127,9 @@ void Game::computeCamera(sf::RenderWindow& window)
 	m_camera.setSize(width, height);
 	m_camera.setCenter(cameraCenter);
 
-    m_cameraUI.setViewport(sf::FloatRect(0.f, 0.f, width/(width+height), height/(width+height)));
-    //m_cameraUI.setCenter(width / 2.f, height / 2.f);
-    //m_cameraUI.setSize(width, height);
+    //m_cameraUI.setViewport(sf::FloatRect(0.f, 0.f, width/(width+height), height/(width+height)));
+    m_cameraUI.setCenter(width / 2.f, height / 2.f);
+    m_cameraUI.setSize(width, height);
 }
 
 void Game::collision()
@@ -264,7 +264,7 @@ void Game::update(float dt)
     BackgroundManager::update(dt);
     EstheticEffectManager::update(dt);
 
-    m_uiBonusAngle += BONUS_ANGULAR_VELOCITY * dt;
+    m_uiBonusAngle += BONUS_ANGULAR_VELOCITY / 2.f * dt;
     m_uiBonusGlowingTimer += dt;
     if(m_uiBonusGlowingTimer >= BONUS_GLOWING_DURATION)
         m_uiBonusGlowingTimer = 0.f;

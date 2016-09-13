@@ -15,14 +15,13 @@ void BackgroundManager::clear()
 {
     for(std::map<int,std::vector<BackgroundDoodad*>>::iterator itDepth=m_aBackground.begin(); itDepth!=m_aBackground.end(); ++itDepth)
     {
-    	std::vector<BackgroundDoodad*> aBackground = itDepth->second;
+    	std::vector<BackgroundDoodad*>& aBackground = itDepth->second;
     	for(std::vector<BackgroundDoodad*>::iterator itBackground=aBackground.begin(); itBackground!=aBackground.end(); )
 		{
-            BackgroundDoodad* tmp = *itBackground;
+            BackgroundDoodad *tmp = *itBackground;
             aBackground.erase(itBackground);
-            delete tmp;
+			delete tmp;
 		}
-		m_aBackground.erase(itDepth);
     }
 }
 
