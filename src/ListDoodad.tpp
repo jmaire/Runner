@@ -34,8 +34,7 @@ template <typename T>
 void ListDoodad<T>::collision(Doodad& doodad)
 {
     for(unsigned int i=0; i<m_doodads.size(); i++)
-        if(&(m_doodads.at(i)) != &doodad)
-            m_doodads.at(i).collision(doodad);
+        m_doodads.at(i).collision(doodad);
 }
 /*
 template <typename T>
@@ -83,11 +82,3 @@ void ListDoodad<T>::render(sf::RenderWindow& window)
     for(typename std::vector<T>::iterator it=m_doodads.begin(); it!=m_doodads.end(); ++it)
         it->render(window);
 }
-/*
-// RocketLauncher
-template <>
-Rocket* ListDoodad<RocketLauncher>::popRocket()
-{
-    return nullptr;
-}
-*/

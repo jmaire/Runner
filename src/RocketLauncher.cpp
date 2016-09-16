@@ -16,7 +16,14 @@ RocketLauncher::RocketLauncher(sf::Vector2f pos)
 }
 
 RocketLauncher::~RocketLauncher()
-{}
+{
+    for(std::vector<Rocket*>::iterator it=m_rocketList.begin(); it!=m_rocketList.end(); )
+    {
+        Rocket* tmp = *it;
+        m_rocketList.erase(it);
+        delete tmp;
+    }
+}
 
 void RocketLauncher::setTarget(Doodad* target)
 {

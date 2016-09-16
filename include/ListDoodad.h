@@ -28,9 +28,6 @@ class ListDoodad
         virtual void update(float dt);
         virtual void render(sf::RenderWindow& window);
 
-        // RocketLauncher
-        //virtual Rocket* popRocket(void);
-
     protected:
         std::vector<T> m_doodads;
 };

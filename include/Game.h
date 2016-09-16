@@ -8,7 +8,6 @@
 //#include "EstheticEffect.h"
 #include "Rocket.h"
 
-//const float LEVEL_CAMERA_BORDER_OFFSET = 60.f;
 const sf::Color GAME_BACKGROUND_COLOR = sf::Color(20, 30, 60, 255);
 
 class Game
@@ -31,8 +30,6 @@ class Game
         static void render(sf::RenderWindow& window);
         static void renderUI(sf::RenderWindow& window);
 
-        //std::vector<sf::Texture> parallaxe;
-
     protected:
         static Level m_level;
 
@@ -46,9 +43,6 @@ class Game
         static ListDoodad<Rocket> m_rocketList;
         static ListDoodad<RocketLauncher> m_rocketLauncherList;
         static ListDoodad<Wall> m_wallList;
-
-        //static std::map<int,std::vector<Background*>> m_aBackground;
-        //static BackgroundManager m_bm;
 
         static float m_uiBonusAngle;
         static float m_uiBonusGlowingTimer;

@@ -16,7 +16,7 @@ Rocket::Rocket()
     m_body.setRectangle(ROCKET_RECTANGLE);
     m_body.setMass(ROCKET_MASS);
     m_body.setFriction(ROCKET_FRICTION);
-    m_body.setGravity(true);
+    //m_body.setGravity(true);
 }
 
 Rocket::Rocket(sf::Vector2f pos, sf::Vector2f vel)

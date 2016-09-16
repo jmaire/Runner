@@ -7,7 +7,14 @@ Doodad::Doodad()
 {}
 
 Doodad::~Doodad()
-{}
+{
+    for(std::vector<EstheticEffect*>::iterator it=m_aEstheticEffect.begin(); it!=m_aEstheticEffect.end(); )
+    {
+        EstheticEffect* tmp = *it;
+        m_aEstheticEffect.erase(it);
+        delete tmp;
+    }
+}
 
 bool Doodad::isBetweenBorder(float borderLeft, float borderRight, float borderBottom)
 {
@@ -53,7 +60,7 @@ bool Doodad::isDoodadOnLeft(Doodad& doodad)
 
 void Doodad::collision(Doodad& doodad)
 {
-	if(m_body.collide(doodad.getBody()))
+	if(m_body.collide(doodad.getBody()) && this != &doodad)
 		collisionEvent(doodad);
 }
 
