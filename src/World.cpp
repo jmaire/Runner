@@ -15,6 +15,11 @@ World::World()
 World::~World()
 {}
 
+std::string World::getName()
+{
+    return m_name;
+}
+
 void World::insereLevel(Level level)
 {
     m_aLevel.push_back(level);

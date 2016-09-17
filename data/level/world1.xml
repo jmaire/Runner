@@ -91,15 +91,7 @@
 
 		<rocketLaunchers>
 			<rocketLauncher>
-				<position posX="-200" posY="300" />
-			</rocketLauncher>
-
-			<rocketLauncher>
 				<position posX="1000" posY="400" />
-			</rocketLauncher>
-			
-			<rocketLauncher>
-				<position posX="2200" posY="50" />
 			</rocketLauncher>
 		</rocketLaunchers>
 

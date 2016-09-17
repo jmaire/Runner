@@ -11,6 +11,8 @@ class World
 
         virtual ~World(void);
 
+        std::string getName(void);
+
         void insereLevel(Level level);
         Level getLevel(unsigned int ind);
         std::vector<Level> getLevelList();

@@ -68,6 +68,7 @@ void RocketLauncher::render(sf::RenderWindow& window)
     sf::Vector2f position = m_body.getPosition();
     sf::RectangleShape shape = getRectangleShapeForWindow(window, rectangle, position);
 	shape.setFillColor(ROCKET_LAUNCHER_COLOR);
+	shape.setRotation(45.f);
 	window.draw(shape);
 
 	if(nullptr == m_target)

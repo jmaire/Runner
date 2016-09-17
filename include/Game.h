@@ -18,6 +18,8 @@ class Game
         static void setLevel(Level& level);
         static void initLevel(void);
 
+        static void setPause(bool pause, sf::RenderWindow& window);
+
         static void collectEstheticEffect(void);
         static void collectRocket(void);
         static void computeCamera(sf::RenderWindow& window);

@@ -74,6 +74,12 @@ void Game::initLevel()
     BackgroundManager::insertBackgroundDoodad(-5,bg2);
 }
 
+void Game::setPause(bool pause, sf::RenderWindow& window)
+{
+    m_pause = pause;
+    window.setMouseCursorVisible(m_pause);
+}
+
 void Game::collectEstheticEffect()
 {
     EstheticEffect* ee;
@@ -164,7 +170,7 @@ int Game::startLevel(sf::RenderWindow& window)
 	while(window.isOpen())
 	{
 		if(!window.hasFocus())
-			m_pause = true;
+			setPause(true, window);
 
 		if(m_character.isDead())
 			return 0;
@@ -181,14 +187,14 @@ int Game::startLevel(sf::RenderWindow& window)
 			if(event.type == sf::Event::Closed)
 				window.close();
 			else if(event.type == sf::Event::Resized || event.type == sf::Event::LostFocus)
-				m_pause = true;
+                setPause(true, window);
 			else if(event.type == sf::Event::KeyPressed)
             {
                 switch(event.key.code)
                 {
 					// Pause / unpause
 					case sf::Keyboard::Escape:
-						m_pause = !m_pause;
+						setPause(!m_pause, window);
 						break;
 
 					// Restart level
@@ -284,21 +290,8 @@ void Game::render(sf::RenderWindow& window)
 	EstheticEffectManager::render(window);
 
     /// drawing cursor
-    if(!m_pause)
+    if(m_pause)
     {
-        window.setMouseCursorVisible(false);
-        sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window), m_camera);
-
-        sf::Sprite cursor;
-        cursor.setOrigin(16,16);
-        cursor.setPosition(coord);
-        cursor.setTexture(RessourcesManager::getCursor());
-        window.draw(cursor);
-	}
-    else
-    {
-        window.setMouseCursorVisible(true);
-        /// adding alpha when pause
         sf::RectangleShape shape;
         sf::Vector2u windowSize = window.getSize();
         shape.setSize(sf::Vector2f(windowSize.x, windowSize.y));
@@ -309,6 +302,15 @@ void Game::render(sf::RenderWindow& window)
         shape.setFillColor(sf::Color(0, 0, 5, 200));
         window.draw(shape);
     }
+    else
+    {
+        sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window), m_camera);
+        sf::Sprite cursor;
+        cursor.setOrigin(16,16);
+        cursor.setPosition(coord);
+        cursor.setTexture(RessourcesManager::getCursor());
+        window.draw(cursor);
+	}
 }
 
 void Game::renderUI(sf::RenderWindow& window)
@@ -349,14 +351,19 @@ void Game::renderUI(sf::RenderWindow& window)
             bonusCount++;
     }
 
-    char buff[8];
+    char buff[64];
     sprintf(buff,"x%d",bonusCount);
     sf::Text bonusText = sf::Text(buff, RessourcesManager::getFont(), 48);
     bonusText.setPosition(sf::Vector2f(60.f, 0.f));
 
+    //sprintf(buff,"%s - %s",bonusCount);
+    sf::Text levelText = sf::Text(m_level.getName(), RessourcesManager::getFont(), 48);
+    levelText.setPosition(sf::Vector2f(1000.f, 0.f));
+
     window.setView(m_cameraUI);
     window.draw(barShape);
     window.draw(bonusText);
+    window.draw(levelText);
     window.draw(bonusGlowingShape);
     window.draw(bonusShape);
 

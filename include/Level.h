@@ -11,18 +11,19 @@
 class Level
 {
     public:
-        Level();
+        Level(void);
         Level(tinyxml2::XMLElement *elem);
 
-        virtual ~Level();
+        virtual ~Level(void);
 
-        float getYMin();
+        std::string getName(void);
+        float getYMin(void);
 
-        Character getCharacter();
-        Exit getExit();
-        ListDoodad<Bonus> getBonusList();
-        ListDoodad<RocketLauncher> getRocketLauncherList();
-        ListDoodad<Wall> getWallList();
+        Character getCharacter(void);
+        Exit getExit(void);
+        ListDoodad<Bonus> getBonusList(void);
+        ListDoodad<RocketLauncher> getRocketLauncherList(void);
+        ListDoodad<Wall> getWallList(void);
 
     protected:
         std::string m_name;

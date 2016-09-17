@@ -28,7 +28,7 @@ class Doodad : public Entity
         virtual EstheticEffect* popEstheticEffect(void);
 
         virtual void update(float dt);
-        virtual void render(sf::RenderWindow& window) {};
+        virtual void render(sf::RenderWindow& window) = 0;
 
     protected:
         std::vector<EstheticEffect*> m_aEstheticEffect;

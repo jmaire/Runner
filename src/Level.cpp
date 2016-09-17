@@ -82,6 +82,11 @@ Level::Level(tinyxml2::XMLElement *elem)
 Level::~Level()
 {}
 
+std::string Level::getName()
+{
+    return m_name;
+}
+
 float Level::getYMin()
 {
     return m_yMin;
