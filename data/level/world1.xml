@@ -91,7 +91,7 @@
 
 		<rocketLaunchers>
 			<rocketLauncher>
-				<position posX="1000" posY="400" />
+				<position posX="1000" posY="250" />
 			</rocketLauncher>
 		</rocketLaunchers>
 

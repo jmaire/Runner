@@ -18,7 +18,7 @@ const float ROCKET_EXPLOSION_VELOCITY = 200.f;
 const float ROCKET_EXPLOSION_DURATION = 0.5f;
 const unsigned int ROCKET_EXPLOSION_LAYOUT = 6;
 
-const float ROCKET_SMOKE_DURATION = 0.4f;
+const float ROCKET_SMOKE_DURATION = 0.2f;
 const float ROCKET_SMOKE_STARTING_SIZE = 12.f;
 const float ROCKET_SMOKE_END_SIZE = 36.f;
 const sf::Color ROCKET_SMOKE_COLOR = sf::Color(150, 150, 150);
@@ -46,6 +46,9 @@ class Rocket : public Doodad
         virtual void propelledCharacter(void);
         virtual bool hadPropelledCharacter(void);
 
+        virtual bool propelHorizontally(void);
+        virtual void setPropelHorizontally(bool propel);
+
         virtual void createSmoke(void);
         virtual void createExplosion(void);
 
@@ -56,7 +59,7 @@ class Rocket : public Doodad
         virtual void render(sf::RenderWindow& window);
 
     protected:
-        bool m_isExploding, m_isDone, m_propelledCharacter;
+        bool m_isExploding, m_isDone, m_propelledCharacter, m_propelHorizontally;
         float m_rocketTimer;
 
         float m_smokeTimer;

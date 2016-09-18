@@ -9,6 +9,7 @@ Rocket::Rocket()
 , m_isExploding(false)
 , m_isDone(false)
 , m_propelledCharacter(false)
+, m_propelHorizontally(false)
 , m_rocketTimer(0.f)
 , m_smokeTimer(0.f)
 , m_target(nullptr)
@@ -32,8 +33,7 @@ Rocket::~Rocket()
 void Rocket::setTarget(Doodad* target)
 {
     m_target = target;
-    m_body.setVelocityLimit(ROCKET_VELOCITY * 1.f);//
-    //m_body.setGravity(false);//
+    m_body.setVelocityLimit(ROCKET_VELOCITY * 1.f);
 }
 
 void Rocket::explode()
@@ -61,6 +61,16 @@ void Rocket::propelledCharacter()
 bool Rocket::hadPropelledCharacter()
 {
     return m_propelledCharacter;
+}
+
+bool Rocket::propelHorizontally()
+{
+    return m_propelHorizontally;
+}
+
+void Rocket::setPropelHorizontally(bool propel)
+{
+    m_propelHorizontally = propel;
 }
 
 void Rocket::createSmoke()
@@ -139,6 +149,10 @@ void Rocket::update(float dt)
     }
 
     m_body.update(dt);
+    if(nullptr != m_target && m_body.collide(m_target->getBody()))
+    {
+        explode();
+    }
 }
 
 void Rocket::render(sf::RenderWindow& window)
