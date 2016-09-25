@@ -20,8 +20,6 @@ class ListDoodad
         virtual void insereDoodad(T doodad);
 
         virtual void collision(Doodad& doodad);
-        //virtual void collisionVector(std::vector<Doodad>& doodads);
-        //virtual void collisionList(ListDoodad<Doodad>& doodads);
 
         virtual EstheticEffect* popEstheticEffect(void);
 

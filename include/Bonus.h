@@ -2,7 +2,6 @@
 #define BONUS_H
 
 #include "Doodad.h"
-//#include "VisitorBonus.h"
 
 const float BONUS_SIZE = 15.f;
 const float BONUS_ANGULAR_VELOCITY = 120.f;

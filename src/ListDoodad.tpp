@@ -36,21 +36,7 @@ void ListDoodad<T>::collision(Doodad& doodad)
     for(unsigned int i=0; i<m_doodads.size(); i++)
         m_doodads.at(i).collision(doodad);
 }
-/*
-template <typename T>
-void ListDoodad<T>::collisionVector(std::vector<Doodad>& doodads)
-{
-    for(unsigned int i=0; i<m_doodads.size(); i++)
-        collision(doodads.at(i));
-}
 
-template <typename T>
-void ListDoodad<T>::collisionList(ListDoodad<Doodad>& doodads)
-{
-    for(unsigned int i=0; i<m_doodads.size(); i++)
-        doodads.collision(m_doodads.at(i));
-}
-*/
 template <typename T>
 EstheticEffect* ListDoodad<T>::popEstheticEffect()
 {

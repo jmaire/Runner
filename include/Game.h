@@ -5,7 +5,6 @@
 #include "Level.h"
 #include "BackgroundManager.h"
 #include "EstheticEffectManager.h"
-//#include "EstheticEffect.h"
 #include "Rocket.h"
 
 const sf::Color GAME_BACKGROUND_COLOR = sf::Color(20, 30, 60, 255);
